@@ -48,7 +48,7 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
             >
               Expert8-Solution
             </Link>
-            . Copyright{" "}
+            .  Copyright{" "}
             
               2024
            
