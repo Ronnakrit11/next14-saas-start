@@ -128,9 +128,9 @@ export function NavMobile() {
         ) : null}
 
         <div className="mt-5 flex items-center justify-end space-x-4">
-          <Link href={siteConfig.links.github} target="_blank" rel="noreferrer">
-            <Icons.gitHub className="size-6" />
-            <span className="sr-only">GitHub</span>
+          <Link href="https://www.facebook.com/experts8academy" target="_blank" rel="noreferrer">
+            <Icons.facebook className="size-6" />
+            <span className="sr-only">Facebook</span>
           </Link>
           <ModeToggle />
         </div>

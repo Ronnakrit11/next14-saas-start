@@ -38,47 +38,32 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
 
       <div className="border-t py-4">
         <div className="container flex max-w-6xl items-center justify-between">
-          {/* <span className="text-muted-foreground text-sm">
-            Copyright &copy; 2024. All rights reserved.
-          </span> */}
           <p className="text-left text-sm text-muted-foreground">
-            Built by{" "}
+            By{" "}
             <Link
-              href={siteConfig.links.twitter}
+              href='https://www.facebook.com/experts8academy'
               target="_blank"
               rel="noreferrer"
               className="font-medium underline underline-offset-4"
             >
-              mickasmt
+              Expert8-Solution
             </Link>
-            . Hosted on{" "}
-            <Link
-              href="https://vercel.com"
-              target="_blank"
-              rel="noreferrer"
-              className="font-medium underline underline-offset-4"
-            >
-              Vercel
-            </Link>
-            . Illustrations by{" "}
-            <Link
-              href="https://popsy.co"
-              target="_blank"
-              rel="noreferrer"
-              className="font-medium underline underline-offset-4"
-            >
-              Popsy
-            </Link>
+            . Copyright{" "}
+            
+              2024
+           
+            . EXPERT 8 SOLUTION CO., LTD. {" "}
+          
           </p>
 
           <div className="flex items-center gap-3">
             <Link
-              href={siteConfig.links.github}
+              href="https://www.facebook.com/experts8academy"
               target="_blank"
               rel="noreferrer"
               className="font-medium underline underline-offset-4"
             >
-              <Icons.gitHub className="size-5" />
+              <Icons.facebook className="size-5" />
             </Link>
             <ModeToggle />
           </div>

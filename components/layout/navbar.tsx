@@ -89,12 +89,12 @@ export function NavBar({ scroll = false }: NavBarProps) {
               </div>
               <div className="flex space-x-4">
                 <Link
-                  href={siteConfig.links.github}
+                  href="https://www.facebook.com/experts8academy"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <Icons.gitHub className="size-7" />
-                  <span className="sr-only">GitHub</span>
+                  <Icons.facebook className="size-7" />
+                  <span className="sr-only">Facebook</span>
                 </Link>
               </div>
             </div>
