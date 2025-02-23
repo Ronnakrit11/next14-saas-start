@@ -54,12 +54,12 @@ export function PricingCards({ userId, subscriptionPlan }: PricingCardsProps) {
                 {isYearly && offer.prices.monthly > 0 ? (
                   <>
                     <span className="mr-2 text-muted-foreground/80 line-through">
-                      ${offer.prices.monthly}
+                      ฿{offer.prices.monthly}
                     </span>
-                    <span>${offer.prices.yearly / 12}</span>
+                    <span>฿{offer.prices.yearly / 12}</span>
                   </>
                 ) : (
-                  `$${offer.prices.monthly}`
+                  `฿${offer.prices.monthly}`
                 )}
               </div>
               <div className="-mb-1 ml-2 text-left text-sm font-medium text-muted-foreground">
@@ -70,7 +70,7 @@ export function PricingCards({ userId, subscriptionPlan }: PricingCardsProps) {
           {offer.prices.monthly > 0 ? (
             <div className="text-left text-sm text-muted-foreground">
               {isYearly
-                ? `$${offer.prices.yearly} will be charged when annual`
+                ? `฿${offer.prices.yearly} will be charged when annual`
                 : "when charged monthly"}
             </div>
           ) : null}

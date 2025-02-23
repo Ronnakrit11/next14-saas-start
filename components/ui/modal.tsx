@@ -3,10 +3,11 @@
 import { Dispatch, SetStateAction } from "react";
 // import { useRouter } from "next/router";
 import { Drawer } from "vaul";
-
+import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { cn } from "@/lib/utils";
+import { X } from "lucide-react"
 
 interface ModalProps {
   children: React.ReactNode;
@@ -15,6 +16,7 @@ interface ModalProps {
   setShowModal?: Dispatch<SetStateAction<boolean>>;
   onClose?: () => void;
   desktopOnly?: boolean;
+  hideClose?: boolean;
   preventDefaultClose?: boolean;
 }
 
@@ -26,6 +28,7 @@ export function Modal({
   onClose,
   desktopOnly,
   preventDefaultClose,
+  hideClose,
 }: ModalProps) {
   // const router = useRouter();
 
@@ -93,6 +96,15 @@ export function Modal({
         )}
       >
         {children}
+        {
+          hideClose ?
+            null :
+            <DialogPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
+              <X className="size-4" />
+              <span className="sr-only">Close</span>
+            </DialogPrimitive.Close>
+
+        }
       </DialogContent>
     </Dialog>
   );
