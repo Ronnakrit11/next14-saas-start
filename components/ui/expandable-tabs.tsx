@@ -4,11 +4,12 @@ import * as React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOnClickOutside } from "usehooks-ts";
 import { cn } from "@/lib/utils";
-import { LucideIcon } from "lucide-react";
+import { DivideIcon as LucideIconType } from "lucide-react";
+import Image from "next/image";
 
 interface Tab {
   title: string;
-  icon: LucideIcon;
+  icon: typeof LucideIconType;
   type?: never;
 }
 
@@ -68,14 +69,14 @@ export function ExpandableTabs({
   };
 
   const Separator = () => (
-    <div className="mx-0.5 h-[24px] w-[1px] bg-border" aria-hidden="true" />
+    <div className="mx-0.5 h-6 w-px bg-border" aria-hidden="true" />
   );
 
   return (
     <div
       ref={outsideClickRef}
       className={cn(
-        "inline-flex flex-nowrap items-center gap-1 rounded-xl border bg-background p-1 shadow-sm",
+        "inline-flex items-center gap-1 rounded-xl border bg-background p-1 shadow-sm",
         className
       )}
     >
