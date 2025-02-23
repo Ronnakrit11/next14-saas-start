@@ -17,8 +17,7 @@ import {
   LayoutPanelLeft,
   LineChart,
   Loader2,
-  LucideIcon,
-  LucideProps,
+  Mail,
   MessagesSquare,
   Moon,
   MoreVertical,
@@ -31,6 +30,8 @@ import {
   Trash,
   User,
   X,
+  type LucideIcon,
+  type LucideProps,
 } from "lucide-react";
 
 export type Icon = LucideIcon;
@@ -48,6 +49,18 @@ export const Icons = {
   copy: Copy,
   dashboard: LayoutPanelLeft,
   ellipsis: MoreVertical,
+  facebook: ({ ...props }: LucideProps) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 320 512"
+      fill="currentColor"
+      {...props}
+    >
+      <path
+        d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"
+      />
+    </svg>
+  ),
   gitHub: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"
@@ -104,6 +117,7 @@ export const Icons = {
   laptop: Laptop,
   lineChart: LineChart,
   logo: Puzzle,
+  mail: Mail,
   media: Image,
   messages: MessagesSquare,
   moon: Moon,
@@ -115,23 +129,6 @@ export const Icons = {
   spinner: Loader2,
   sun: SunMedium,
   trash: Trash,
-  twitter: ({ ...props }: LucideProps) => (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      focusable="false"
-      data-prefix="fab"
-      data-icon="twitter"
-      role="img"
-      {...props}
-    >
-      <path
-        d="M14.258 10.152L23.176 0h-2.113l-7.747 8.813L7.133 0H0l9.352 13.328L0 23.973h2.113l8.176-9.309 6.531 9.309h7.133zm-2.895 3.293l-.949-1.328L2.875 1.56h3.246l6.086 8.523.945 1.328 7.91 11.078h-3.246zm0 0"
-        fill="currentColor"
-      />
-    </svg>
-  ),
   user: User,
   warning: AlertTriangle,
 };
