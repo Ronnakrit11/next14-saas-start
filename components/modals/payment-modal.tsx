@@ -42,7 +42,7 @@ export function PaymentModal({
   amount,
 }: {
   showModal: boolean;
-  amount: number;
+  amount: number | null;
   setShowModal: Dispatch<SetStateAction<boolean>>;
 }) {
   const [qrCode, setQrCode] = useState<string>("");
@@ -55,7 +55,7 @@ export function PaymentModal({
   > | null>(null);
   const [createAt, setCreateAt] = useState<string | null>(null);
   const [isPending, setIsPending] = useState<boolean>(false);
-  const [currentAmount, setCurrentAmount] = useState<number>(amount);
+  const [currentAmount, setCurrentAmount] = useState<number | null>(amount);
 
   const fetchPromtpay = useCallback(async () => {
     try {
@@ -201,9 +201,9 @@ export function PaymentModal({
               </div>
             )}
 
-            {qrCode && amount && (
+            {qrCode && currentAmount && (
               <div className="mb-4 text-4xl font-bold">
-                {parseFloat(amount + "").toFixed(2)} THB
+                {parseFloat(currentAmount + "").toFixed(2)} THB
               </div>
             )}
 

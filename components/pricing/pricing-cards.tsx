@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import Link from "next/link";
 import { UserSubscriptionPlan } from "@/types";
 
@@ -14,6 +14,7 @@ import { ModalContext } from "@/components/modals/providers";
 import { HeaderSection } from "@/components/shared/header-section";
 import { Icons } from "@/components/shared/icons";
 import MaxWidthWrapper from "@/components/shared/max-width-wrapper";
+import { PaymentModal } from "../modals/payment-modal";
 
 interface PricingCardsProps {
   userId?: string;
@@ -27,6 +28,30 @@ export function PricingCards({ userId, subscriptionPlan }: PricingCardsProps) {
       : false;
   const [isYearly, setIsYearly] = useState<boolean>(!!isYearlyDefault);
   const { setShowSignInModal } = useContext(ModalContext);
+  let [showModal, setShowModal] = useState(false);
+  const [currentAmount, setCurrentAmount] = useState<number | null>(null);
+
+  useEffect(() => {
+    fetchPendingTransaction()
+    return () => {
+
+    };
+  }, []);
+
+  const fetchPendingTransaction = async () => {
+    const res = await fetch("/api/payment/promptpay/pending-transaction", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (res.ok) {
+      const { amount } = await res.json();
+      setCurrentAmount(+amount);
+      setShowModal(true);
+    }
+  }
+
 
   const toggleBilling = () => {
     setIsYearly(!isYearly);
@@ -138,6 +163,13 @@ export function PricingCards({ userId, subscriptionPlan }: PricingCardsProps) {
 
   return (
     <MaxWidthWrapper>
+      {
+        showModal && <PaymentModal
+          amount={currentAmount}
+          showModal={showModal}
+          setShowModal={setShowModal}
+        />
+      }
       <section className="flex flex-col items-center text-center">
         <HeaderSection label="Pricing" title="Start at full speed !" />
 
