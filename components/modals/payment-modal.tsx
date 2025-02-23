@@ -57,6 +57,37 @@ export function PaymentModal({
   const [isPending, setIsPending] = useState<boolean>(false);
   const [currentAmount, setCurrentAmount] = useState<number>(amount);
 
+  const fetchPromtpay = useCallback(async () => {
+    try {
+      if (!amount) {
+        setError("Please select an amount");
+        return;
+      }
+      setIsPending(true);
+
+      const res = await fetch("/api/payment/promptpay?amount=" + amount, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (res.ok) {
+        const { qrCode, refId, createdAt, amount } = await res.json();
+        setQrCode(qrCode);
+        setRefId(refId);
+        setCreateAt(createdAt);
+        setCurrentAmount(amount);
+      } else {
+        setError("Failed to generate QR Code");
+      }
+      setIsPending(false);
+    } catch (error) {
+      console.error("Error generating QR code:", error);
+      setError("Failed to generate QR code");
+    }
+  }, [amount]);
+
   useEffect(() => {
     const socketInstance: Socket<ServerToClientEvents, ClientToServerEvents> =
       io(SOCKET_URL);
@@ -116,38 +147,7 @@ export function PaymentModal({
 
   useEffect(() => {
     fetchPromtpay();
-  }, [currentAmount]);
-
-  const fetchPromtpay = useCallback(async () => {
-    try {
-      if (!amount) {
-        setError("Please select an amount");
-        return;
-      }
-      setIsPending(true);
-
-      const res = await fetch("/api/payment/promptpay?amount=" + amount, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (res.ok) {
-        const { qrCode, refId, createdAt, amount } = await res.json();
-        setQrCode(qrCode);
-        setRefId(refId);
-        setCreateAt(createdAt);
-        setCurrentAmount(amount);
-      } else {
-        setError("Failed to generate QR Code");
-      }
-      setIsPending(false);
-    } catch (error) {
-      console.error("Error generating QR code:", error);
-      setError("Failed to generate QR code");
-    }
-  }, [amount, currentAmount]);
+  }, [fetchPromtpay]);
 
   const cancelTransaction = async () => {
     try {
@@ -182,11 +182,11 @@ export function PaymentModal({
       hideClose
     >
       <div className="w-full">
-        <div className="flex flex-col items-center justify-center space-y-3 border-b px-4 py-6 pt-8 text-center">
+        <div className="border-b px-4 py-6 pt-8 text-center">
           <h3 className="font-urban text-2xl font-bold">THAI QR PAYMENT</h3>
         </div>
 
-        <div className="flex flex-col space-y-4 bg-muted/50 px-4 py-8">
+        <div className="space-y-4 bg-muted/50 px-4 py-8">
           <div className="rounded-lg p-6 text-center">
             {/* QR Code Display */}
             {qrCode && (
@@ -209,7 +209,7 @@ export function PaymentModal({
 
             {!!qrCode && (
               <div>
-                <div className="mb-2 text-md font-bold text-blue-900">
+                <div className="mb-2 font-bold text-blue-900">
                   Please scan QR Code to pay
                 </div>
                 <div className="mb-2 text-xs text-gray-600">
@@ -224,7 +224,7 @@ export function PaymentModal({
                         position: "top-center",
                       });
                     }}
-                    className="ml-2 inline-block h-6 w-6 cursor-pointer text-gray-500"
+                    className="ml-2 inline-block size-6 cursor-pointer text-gray-500"
                   />
                 </div>
               </div>
@@ -246,7 +246,7 @@ export function PaymentModal({
                 Do not close or cancel during payment
                 <br />
                 Verifying transaction...
-                <Loader2 className="ml-2 inline-block h-2.5 w-2.5 animate-spin" />
+                <Loader2 className="ml-2 inline-block size-2.5 animate-spin" />
               </div>
             )}
 
@@ -259,7 +259,7 @@ export function PaymentModal({
               >
                 {isPending ? (
                   <>
-                    <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />{" "}
+                    <Icons.spinner className="mr-2 size-4 animate-spin" />{" "}
                     Loading...
                   </>
                 ) : (
