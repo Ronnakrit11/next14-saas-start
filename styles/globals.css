@@ -30,6 +30,13 @@
     --chart-3: 270 91% 65%;
     --chart-4: 269 97% 85%;
     --chart-5: 269 100% 92%;
+
+    /* Rainbow Button Colors */
+    --color-1: 0 100% 63%;
+    --color-2: 270 100% 63%;
+    --color-3: 210 100% 63%;
+    --color-4: 195 100% 63%;
+    --color-5: 90 100% 63%;
   }
 
   .dark {
@@ -90,8 +97,6 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-
-
 
 @layer base {
   * {
