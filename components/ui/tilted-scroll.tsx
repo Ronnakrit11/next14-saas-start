@@ -60,7 +60,7 @@ const defaultItems: TiltedScrollItem[] = [
   { id: "3", text: "Convenience" },
   { id: "4", text: "More winrate" },
   { id: "5", text: "Decrease drawdown" },
-  { id: "6", text: "Item 6" },
-  { id: "7", text: "Item 7" },
-  { id: "8", text: "Item 8" },
+  { id: "6", text: "Special indicator" },
+  { id: "7", text: "Darkpool data" },
+  
 ]
