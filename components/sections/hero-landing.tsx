@@ -36,7 +36,7 @@ export default async function HeroLanding() {
         >
           <span className="mr-3">🎉</span>
           <span className="hidden md:flex">Speed Up&nbsp;</span>Your Business
-          With Powerfull Tool
+          With Powerful Tool
         </Link>
 
         <h1 className="text-balance font-urban text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-[66px]">
