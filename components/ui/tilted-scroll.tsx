@@ -16,12 +16,12 @@ export function TiltedScroll({
 }: TiltedScrollProps) {
   return (
     <div className={cn("flex items-center justify-center", className)}>
-      <div className="relative [mask-composite:intersect] overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5rem),linear-gradient(to_left,transparent,black_5rem),linear-gradient(to_bottom,transparent,black_5rem),linear-gradient(to_top,transparent,black_5rem)]">
-        <div className="grid grid-cols-1 gap-5 h-[250px] w-[300px] animate-skew-scroll">
+      <div className="relative overflow-hidden [mask-composite:intersect] [mask-image:linear-gradient(to_right,transparent,black_5rem),linear-gradient(to_left,transparent,black_5rem),linear-gradient(to_bottom,transparent,black_5rem),linear-gradient(to_top,transparent,black_5rem)]">
+        <div className="grid h-[250px] w-[300px] animate-skew-scroll grid-cols-1 gap-5">
           {items.map((item) => (
             <div
               key={item.id}
-              className="group relative flex items-center gap-2 rounded-md border border-border/40 bg-gradient-to-b from-background/80 to-muted/80 p-4 shadow-md transition-all duration-300 ease-in-out hover:-translate-x-1 hover:-translate-y-1 hover:scale-105 hover:shadow-xl dark:border-border cursor-pointer"
+              className="group relative flex cursor-pointer items-center gap-2 rounded-md border border-border/40 bg-gradient-to-b from-background/80 to-muted/80 p-4 shadow-md transition-all duration-300 ease-in-out hover:-translate-x-1 hover:-translate-y-1 hover:scale-105 hover:shadow-xl dark:border-border"
             >
               <CheckCircleIcon className="mr-2 size-5 shrink-0 stroke-foreground/40 transition-colors group-hover:stroke-foreground" />
               <p className="text-foreground/80 transition-colors group-hover:text-foreground">
