@@ -32,7 +32,7 @@ function Hero() {
         <div className="flex flex-col items-center justify-center gap-8 py-20 lg:py-7 ">
           <div>
             <RainbowButton>
-              Let's get start<MoveRight className="size-3" />
+              Let get start<MoveRight className="size-3" />
             </RainbowButton>
           </div>
           <div className="flex flex-col gap-4">
