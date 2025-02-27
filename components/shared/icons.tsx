@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import {
   AlertTriangle,
@@ -13,7 +14,7 @@ import {
   FileText,
   HelpCircle,
   Home,
-  Image,
+  Image as ImageIcon,
   Laptop,
   LayoutPanelLeft,
   LineChart,
@@ -36,6 +37,10 @@ import {
 } from "lucide-react";
 
 export type Icon = LucideIcon;
+
+interface LogoProps extends Omit<React.ComponentProps<typeof Image>, 'src' | 'alt'> {
+  className?: string;
+}
 
 export const Icons = {
   add: Plus,
@@ -117,22 +122,23 @@ export const Icons = {
   home: Home,
   laptop: Laptop,
   lineChart: LineChart,
-  logo: ({ className, ...props }: React.HTMLAttributes<HTMLImageElement>) => (
-    <img 
-      src="/mylogo.png" 
-      alt="Logo" 
+  logo: ({ className, ...props }: LogoProps) => (
+    <Image
+      src="/mylogo.png"
+      alt="Logo"
       width={50}
       height={50}
-      className={cn("size-8", className)}
+      className={cn("h-8 w-8", className)}
       {...props}
     />
   ),
   mail: Mail,
-  media: Image,
+  media: ImageIcon,
   messages: MessagesSquare,
   moon: Moon,
   package: Package,
   page: File,
+  placeholder: File,
   post: FileText,
   search: Search,
   settings: Settings,

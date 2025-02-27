@@ -13,31 +13,26 @@ export function EmptyPlaceholder({
   return (
     <div
       className={cn(
-        "flex flex-1 items-center justify-center rounded-lg border border-dashed p-8 text-center shadow-sm animate-in fade-in-50",
-        className,
+        "flex min-h-screen flex-1 items-center justify-center rounded-lg border border-dashed p-8 text-center animate-in fade-in-50",
+        className
       )}
       {...props}
     >
-      <div className="flex max-w-[420px] flex-col items-center text-center">
+      <div className="mx-auto flex max-w-[420px] flex-col items-center text-center">
         {children}
       </div>
     </div>
   );
 }
 
-interface EmptyPlaceholderIconProps
-  extends Partial<React.SVGProps<SVGSVGElement>> {
+interface EmptyPlaceholderIconProps {
   name: keyof typeof Icons;
-  ref?:
-    | ((instance: SVGSVGElement | null) => void)
-    | React.RefObject<SVGSVGElement>
-    | null;
+  className?: string;
 }
 
 EmptyPlaceholder.Icon = function EmptyPlaceholderIcon({
   name,
   className,
-  ...props
 }: EmptyPlaceholderIconProps) {
   const Icon = Icons[name];
 
@@ -46,19 +41,16 @@ EmptyPlaceholder.Icon = function EmptyPlaceholderIcon({
   }
 
   return (
-    <div className="flex size-20 items-center justify-center rounded-full bg-muted">
-      <Icon className={cn("size-10", className)} {...props} />
+    <div className="flex items-center justify-center rounded-full bg-muted p-5">
+      <Icon className={cn("h-10 w-10", className)} />
     </div>
   );
 };
 
-interface EmptyPlaceholderTitleProps
-  extends React.HTMLAttributes<HTMLHeadingElement> {}
-
 EmptyPlaceholder.Title = function EmptyPlaceholderTitle({
   className,
   ...props
-}: EmptyPlaceholderTitleProps) {
+}: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h3
       className={cn("mt-5 font-heading text-2xl font-bold", className)}
@@ -67,18 +59,15 @@ EmptyPlaceholder.Title = function EmptyPlaceholderTitle({
   );
 };
 
-interface EmptyPlaceholderDescriptionProps
-  extends React.HTMLAttributes<HTMLParagraphElement> {}
-
 EmptyPlaceholder.Description = function EmptyPlaceholderDescription({
   className,
   ...props
-}: EmptyPlaceholderDescriptionProps) {
+}: React.HTMLAttributes<HTMLParagraphElement>) {
   return (
     <p
       className={cn(
         "mb-5 mt-1.5 text-center text-sm font-normal leading-6 text-muted-foreground",
-        className,
+        className
       )}
       {...props}
     />
