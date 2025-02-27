@@ -11,7 +11,7 @@ import { RainbowButton } from "@/components/ui/rainbow-button";
 function Hero() {
   const [titleNumber, setTitleNumber] = useState(0);
   const titles = useMemo(
-    () => ["Fast", "Smart", "wonderful", ],
+    () => ["Fastest", "Smart", "perfomance", ],
     []
   );
 
@@ -32,11 +32,11 @@ function Hero() {
         <div className="flex flex-col items-center justify-center gap-8 py-20 lg:py-7 ">
           <div>
             <RainbowButton>
-              Read our launch article <MoveRight className="size-3" />
+              Let's get start<MoveRight className="size-3" />
             </RainbowButton>
           </div>
           <div className="flex flex-col gap-4">
-            <h1 className="font-regular max-w-2xl text-center text-5xl tracking-tighter md:text-7xl">
+            <h1 className="font-regular max-w-2xl text-center text-4xl tracking-tighter md:text-6xl">
               <span className="text-spektr-cyan-50">Make Your Trading </span>
               <span className="relative flex w-full justify-center overflow-hidden text-center md:pb-4 md:pt-1">
                 &nbsp;
