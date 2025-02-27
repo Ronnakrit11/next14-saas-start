@@ -243,7 +243,7 @@ export default function Powered() {
     <section className="py-14 text-muted-foreground">
       <MaxWidthWrapper>
         <h2 className="text-center text-sm font-semibold uppercase">
-          Powered by
+          Powerful Tools
         </h2>
         <br />
 

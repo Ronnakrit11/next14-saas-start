@@ -16,14 +16,14 @@ export function TiltedScroll({
 }: TiltedScrollProps) {
   return (
     <div className={cn("flex items-center justify-center", className)}>
-      <div className="relative overflow-hidden [mask-composite:intersect] [mask-image:linear-gradient(to_right,transparent,black_5rem),linear-gradient(to_left,transparent,black_5rem),linear-gradient(to_bottom,transparent,black_5rem),linear-gradient(to_top,transparent,black_5rem)]">
-        <div className="grid h-[250px] w-[300px] gap-5 animate-skew-scroll grid-cols-1">
+      <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5rem),linear-gradient(to_left,transparent,black_5rem),linear-gradient(to_bottom,transparent,black_5rem),linear-gradient(to_top,transparent,black_5rem)] [mask-composite:intersect]">
+        <div className="grid h-[250px] w-[300px] animate-skew-scroll grid-cols-1 gap-5">
           {items.map((item) => (
             <div
               key={item.id}
-              className="group flex items-center gap-2 cursor-pointer rounded-md border border-border/40 bg-gradient-to-b from-background/80 to-muted/80 p-4 shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:-translate-x-1 hover:-translate-y-1 hover:shadow-xl dark:border-border"
+              className="group relative flex cursor-pointer items-center gap-2 rounded-md border border-border/40 bg-gradient-to-b from-background/80 to-muted/80 p-4 shadow-md transition-all duration-300 ease-in-out hover:-translate-x-1 hover:-translate-y-1 hover:scale-105 hover:shadow-xl dark:border-border"
             >
-              <CheckCircleIcon className="h-6 w-6 mr-2 stroke-foreground/40 transition-colors group-hover:stroke-foreground" />
+              <CheckCircleIcon className="mr-2 size-5 shrink-0 stroke-foreground/40 transition-colors group-hover:stroke-foreground" />
               <p className="text-foreground/80 transition-colors group-hover:text-foreground">
                 {item.text}
               </p>
@@ -55,11 +55,11 @@ function CheckCircleIcon(props: React.SVGProps<SVGSVGElement>) {
 }
 
 const defaultItems: TiltedScrollItem[] = [
-  { id: "1", text: "Item 1" },
-  { id: "2", text: "Item 2" },
-  { id: "3", text: "Item 3" },
-  { id: "4", text: "Item 4" },
-  { id: "5", text: "Item 5" },
+  { id: "1", text: "Fast" },
+  { id: "2", text: "Scalable" },
+  { id: "3", text: "Convenience" },
+  { id: "4", text: "More winrate" },
+  { id: "5", text: "Decrease drawdown" },
   { id: "6", text: "Item 6" },
   { id: "7", text: "Item 7" },
   { id: "8", text: "Item 8" },
