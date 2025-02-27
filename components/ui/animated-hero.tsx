@@ -1,83 +1,73 @@
-import { useEffect, useMemo, useState } from "react";
-import { motion } from "framer-motion";
-import { MoveRight, PhoneCall } from "lucide-react";
+"use client";
+
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowRight, Check } from "lucide-react";
+
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
-function Hero() {
-  const [titleNumber, setTitleNumber] = useState(0);
-  const titles = useMemo(
-    () => ["Fast", "Smart", "wonderful", ],
-    []
-  );
+const features = [
+  {
+    text: "Faster than light",
+    status: "default",
+  },
+  {
+    text: "Customizable",
+    status: "success",
+  },
+  {
+    text: "Keep your loved ones safe",
+    status: "default",
+  },
+];
+
+export function AnimatedHero() {
+  const [currentFeature, setCurrentFeature] = useState(0);
 
   useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      if (titleNumber === titles.length - 1) {
-        setTitleNumber(0);
-      } else {
-        setTitleNumber(titleNumber + 1);
-      }
+    const interval = setInterval(() => {
+      setCurrentFeature((prevFeature) => (prevFeature + 1) % features.length);
     }, 2000);
-    return () => clearTimeout(timeoutId);
-  }, [titleNumber, titles]);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <div className="w-full">
-      <div className="container mx-auto">
-        <div className="flex gap-8 py-20 lg:py-40 items-center justify-center flex-col">
-          <div>
-            <Button variant="secondary" size="sm" className="gap-4">
-              Read our launch article <MoveRight className="w-4 h-4" />
-            </Button>
-          </div>
-          <div className="flex gap-4 flex-col">
-            <h1 className="text-5xl md:text-7xl max-w-2xl tracking-tighter text-center font-regular">
-              <span className="text-spektr-cyan-50">Make Your Trading </span>
-              <span className="relative flex w-full justify-center overflow-hidden text-center md:pb-4 md:pt-1">
-                &nbsp;
-                {titles.map((title, index) => (
-                  <motion.span
-                    key={index}
-                    className="absolute font-semibold"
-                    initial={{ opacity: 0, y: "-100" }}
-                    transition={{ type: "spring", stiffness: 50 }}
-                    animate={
-                      titleNumber === index
-                        ? {
-                            y: 0,
-                            opacity: 1,
-                          }
-                        : {
-                            y: titleNumber > index ? -150 : 150,
-                            opacity: 0,
-                          }
-                    }
-                  >
-                    {title}
-                  </motion.span>
-                ))}
-              </span>
-            </h1>
+    <div className="mx-auto flex max-w-5xl flex-col items-center gap-8">
+      <Button
+        className="group gap-2 rounded-full bg-gradient-to-r from-purple-500 to-purple-900 text-white hover:shadow-[0_0_0_3px_rgba(168,85,247,0.4)]"
+        size="lg"
+      >
+        <span>Try it now</span>
+        <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+      </Button>
 
-            <p className="text-lg md:text-xl leading-relaxed tracking-tight text-muted-foreground max-w-2xl text-center">
-              Managing a small business today is already tough. Avoid further
-              complications by ditching outdated, tedious trade methods. Our
-              goal is to streamline SMB trade, making it easier and faster than
-              ever.
+      <div className="relative flex h-[40px] items-center justify-center">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentFeature}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="absolute flex items-center gap-2"
+          >
+            <div
+              className={cn(
+                "flex size-6 items-center justify-center rounded-full",
+                features[currentFeature].status === "success"
+                  ? "bg-green-500"
+                  : "bg-purple-500",
+              )}
+            >
+              <Check className="size-4 text-white" />
+            </div>
+            <p className="text-sm font-medium text-muted-foreground">
+              {features[currentFeature].text}
             </p>
-          </div>
-          <div className="flex flex-row gap-3">
-            <Button size="lg" className="gap-4" variant="outline">
-              Jump on a call <PhoneCall className="w-4 h-4" />
-            </Button>
-            <Button size="lg" className="gap-4">
-              Sign up here <MoveRight className="w-4 h-4" />
-            </Button>
-          </div>
-        </div>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );
 }
-
-export { Hero };

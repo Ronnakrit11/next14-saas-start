@@ -6,13 +6,15 @@ import InfoLanding from "@/components/sections/info-landing";
 import Powered from "@/components/sections/powered";
 import PreviewLanding from "@/components/sections/preview-landing";
 import Testimonials from "@/components/sections/testimonials";
-import  { Hero } from "@/components/ui/animated-hero";
+import HeroLanding from "@/components/sections/hero-landing";
+
+
 
 
 export default function IndexPage() {
   return (
     <>
-      <Hero />
+     <HeroLanding/>
       <PreviewLanding />
       <Powered />
       <BentoGrid />
