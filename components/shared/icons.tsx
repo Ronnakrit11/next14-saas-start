@@ -124,7 +124,7 @@ export const Icons = {
   lineChart: LineChart,
   logo: ({ className, ...props }: LogoProps) => (
     <Image
-      src="/nextgen.png"
+      src="/mylogo.png"
       alt="Logo"
       width={50}
       height={50}
