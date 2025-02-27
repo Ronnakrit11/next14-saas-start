@@ -34,13 +34,16 @@ interface UserNameFormProps {
 }
 
 export function UserRoleForm({ user }: UserNameFormProps) {
+  // Hide the role form if not the admin email
+  if (user.role !== "ADMIN") return null;
+
   const { update } = useSession();
   const [updated, setUpdated] = useState(false);
   const [isPending, startTransition] = useTransition();
   const updateUserRoleWithId = updateUserRole.bind(null, user.id);
 
   const roles = Object.values(UserRole);
-  const [role, setRole] = useState(user.role);
+  const [role, setRole] = useState<UserRole>(user.role);
 
   const form = useForm<FormData>({
     resolver: zodResolver(userRoleSchema),
@@ -80,11 +83,9 @@ export function UserRoleForm({ user }: UserNameFormProps) {
                 <FormItem className="w-full space-y-0">
                   <FormLabel className="sr-only">Role</FormLabel>
                   <Select
-                    // TODO:(FIX) Option value not update. Use useState for the moment
                     onValueChange={(value: UserRole) => {
                       setUpdated(user.role !== value);
                       setRole(value);
-                      // field.onChange;
                     }}
                     name={field.name}
                     defaultValue={user.role}
