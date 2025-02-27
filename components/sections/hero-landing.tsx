@@ -1,19 +1,10 @@
 import Link from "next/link";
-import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
 
 import { env } from "@/env.mjs";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { Icons } from "@/components/shared/icons";
-
-const words = [
-  "Our Solution",
-  "Expert8 Tools", 
-  "Smart Trading",
-  "Your Success"
-];
 
 export default async function HeroLanding() {
   const { stargazers_count: stars } = await fetch(
@@ -33,12 +24,12 @@ export default async function HeroLanding() {
     .catch((e) => console.log(e));
 
   return (
-    <section className="py-12 sm:py-20 lg:py-20">
+    <section className="space-y-6 py-12 sm:py-20 lg:py-20">
       <div className="container flex max-w-5xl flex-col items-center gap-5 text-center">
         <Link
           href="https://www.facebook.com/experts8academy"
           className={cn(
-            buttonVariants({ variant: "outline", size: "sm", }),
+            buttonVariants({ variant: "outline", size: "sm", rounded: "full" }),
             "px-4",
           )}
           target="_blank"
@@ -48,16 +39,18 @@ export default async function HeroLanding() {
           With Powerful Tool
         </Link>
 
-        <h1 className="font-urban text-balance text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-[66px]">
+        <h1 className="text-balance font-urban text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-[66px]">
           Kick off with a bang with{" "}
-          <AnimatedText />
+          <span className="text-gradient_indigo-purple font-extrabold">
+            Our Solution
+          </span>
         </h1>
 
         <p
-          className="text-balance max-w-2xl text-muted-foreground sm:text-xl sm:leading-8"
+          className="max-w-2xl text-balance leading-normal text-muted-foreground sm:text-xl sm:leading-8"
           style={{ animationDelay: "0.35s", animationFillMode: "forwards" }}
         >
-          Build your Business with latest Tech Stack of Next.js 14, Prisma, Neon, Auth.js v5,
+          Build your Business with latest Tech Stack of  Next.js 14, Prisma, Neon, Auth.js v5,
           Resend, React Email, Shadcn/ui, Stripe.
         </p>
 
@@ -69,7 +62,7 @@ export default async function HeroLanding() {
             href="/pricing"
             prefetch={true}
             className={cn(
-              buttonVariants({ size: "lg" }),
+              buttonVariants({ size: "lg", rounded: "full" }),
               "gap-2",
             )}
           >
@@ -84,7 +77,7 @@ export default async function HeroLanding() {
               buttonVariants({
                 variant: "outline",
                 size: "lg",
-               
+                rounded: "full",
               }),
               "px-5",
             )}
@@ -95,34 +88,5 @@ export default async function HeroLanding() {
         </div>
       </div>
     </section>
-  );
-}
-
-function AnimatedText() {
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prevIndex) => (prevIndex + 1) % words.length);
-    }, 3000); // Change word every 3 seconds
-
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <span className="inline-block font-extrabold text-gradient_indigo-purple">
-      <AnimatePresence mode="wait">
-        <motion.span
-          key={index}
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: -20, opacity: 0 }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
-          className="inline-block"
-        >
-          {words[index]}
-        </motion.span>
-      </AnimatePresence>
-    </span>
   );
 }
