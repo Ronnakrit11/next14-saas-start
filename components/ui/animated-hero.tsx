@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { MoveRight, PhoneCall } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 function Hero() {
   const [titleNumber, setTitleNumber] = useState(0);
@@ -70,9 +71,11 @@ function Hero() {
             <Button size="lg" className="gap-4" variant="outline">
               Jump on a call <PhoneCall className="size-4" />
             </Button>
+            <a href="/register">
             <Button size="lg" className="gap-4">
               Sign up here <MoveRight className="size-4" />
             </Button>
+            </a>
           </div>
         </div>
       </div>
