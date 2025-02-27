@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import {
   AlertTriangle,
   ArrowRight,
@@ -116,7 +117,16 @@ export const Icons = {
   home: Home,
   laptop: Laptop,
   lineChart: LineChart,
-  logo: Puzzle,
+  logo: ({ className, ...props }: React.HTMLAttributes<HTMLImageElement>) => (
+    <img 
+      src="/mylogo.png" 
+      alt="Logo" 
+      width={50}
+      height={50}
+      className={cn("size-8", className)}
+      {...props}
+    />
+  ),
   mail: Mail,
   media: Image,
   messages: MessagesSquare,
