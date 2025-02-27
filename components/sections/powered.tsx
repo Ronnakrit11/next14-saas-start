@@ -1,5 +1,5 @@
 import Link from "next/link";
-
+import { TiltedScroll } from "../ui/tilted-scroll";
 import MaxWidthWrapper from "@/components/shared/max-width-wrapper";
 
 const logos = [
@@ -245,35 +245,15 @@ export default function Powered() {
         <h2 className="text-center text-sm font-semibold uppercase">
           Powered by
         </h2>
+        <br />
 
-        <div className="mt-10 grid grid-cols-2 place-items-center gap-8 md:grid-cols-4">
-          {logos.slice(0, 4).map((logo) => (
-            <Link
-              target="_blank"
-              key={logo.title}
-              href={logo.href}
-              aria-label={logo.title}
-              className="duration-250 grayscale transition hover:text-foreground hover:grayscale-0"
-            >
-              {logo.icon}
-            </Link>
-          ))}
-        </div>
+     
 
-        <div className="mt-8 grid grid-cols-2 place-items-center gap-8 md:mt-10 md:grid-cols-4">
-          {logos.slice(4, 8).map((logo) => (
-            <Link
-              target="_blank"
-              key={logo.title}
-              href={logo.href}
-              aria-label={logo.title}
-              className="duration-250 grayscale transition hover:text-foreground hover:grayscale-0"
-            >
-              {logo.icon}
-            </Link>
-          ))}
-        </div>
+       
+       <TiltedScroll/>
+       
       </MaxWidthWrapper>
     </section>
+    
   );
 }

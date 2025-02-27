@@ -125,18 +125,27 @@ const config = {
             opacity: "1",
           },
         },
+        // Skew scroll animation
+        "skew-scroll": {
+          "0%": {
+            transform: "rotateX(20deg) rotateZ(-20deg) skewX(20deg)",
+          },
+          "100%": {
+            transform: "rotateX(20deg) rotateZ(-20deg) skewX(20deg) translateY(-100%)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-
         // Fade up and down
         "fade-up": "fade-up 0.5s",
         "fade-down": "fade-down 0.5s",
-
         // Fade in and out
         "fade-in": "fade-in 0.4s",
         "fade-out": "fade-out 0.4s",
+        // Skew scroll
+        "skew-scroll": "skew-scroll 20s linear infinite",
       },
     },
   },
