@@ -24,14 +24,14 @@ function Hero() {
   return (
     <div className="w-full">
       <div className="container mx-auto">
-        <div className="flex gap-8 py-20 lg:py-40 items-center justify-center flex-col">
+        <div className="flex flex-col items-center justify-center gap-8 py-20 lg:py-40">
           <div>
             <Button variant="secondary" size="sm" className="gap-4">
-              Read our launch article <MoveRight className="w-4 h-4" />
+              Read our launch article <MoveRight className="size-4" />
             </Button>
           </div>
-          <div className="flex gap-4 flex-col">
-            <h1 className="text-5xl md:text-7xl max-w-2xl tracking-tighter text-center font-regular">
+          <div className="flex flex-col gap-4">
+            <h1 className="font-regular max-w-2xl text-center text-5xl tracking-tighter md:text-7xl">
               <span className="text-spektr-cyan-50">Make Your Trading </span>
               <span className="relative flex w-full justify-center overflow-hidden text-center md:pb-4 md:pt-1">
                 &nbsp;
@@ -59,7 +59,7 @@ function Hero() {
               </span>
             </h1>
 
-            <p className="text-lg md:text-xl leading-relaxed tracking-tight text-muted-foreground max-w-2xl text-center">
+            <p className="max-w-2xl text-center text-lg leading-relaxed tracking-tight text-muted-foreground md:text-xl">
               Managing a small business today is already tough. Avoid further
               complications by ditching outdated, tedious trade methods. Our
               goal is to streamline SMB trade, making it easier and faster than
@@ -68,10 +68,10 @@ function Hero() {
           </div>
           <div className="flex flex-row gap-3">
             <Button size="lg" className="gap-4" variant="outline">
-              Jump on a call <PhoneCall className="w-4 h-4" />
+              Jump on a call <PhoneCall className="size-4" />
             </Button>
             <Button size="lg" className="gap-4">
-              Sign up here <MoveRight className="w-4 h-4" />
+              Sign up here <MoveRight className="size-4" />
             </Button>
           </div>
         </div>
