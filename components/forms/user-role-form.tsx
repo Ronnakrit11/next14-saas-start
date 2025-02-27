@@ -34,16 +34,13 @@ interface UserNameFormProps {
 }
 
 export function UserRoleForm({ user }: UserNameFormProps) {
-  // Hide the role form if not the admin email
-  if (user.role !== "ADMIN") return null;
-
   const { update } = useSession();
   const [updated, setUpdated] = useState(false);
   const [isPending, startTransition] = useTransition();
   const updateUserRoleWithId = updateUserRole.bind(null, user.id);
 
   const roles = Object.values(UserRole);
-  const [role, setRole] = useState<UserRole>(user.role);
+  const [role, setRole] = useState(user.role);
 
   const form = useForm<FormData>({
     resolver: zodResolver(userRoleSchema),
