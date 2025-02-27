@@ -68,12 +68,14 @@ function Hero() {
             </p>
           </div>
           <div className="flex flex-row gap-3">
+             <Link
+            href="https://www.facebook.com/experts8academy">
             <Button size="lg" className="gap-4" variant="outline">
-              Jump on a call <PhoneCall className="size-4" />
-            </Button>
+              Contact <PhoneCall className="size-4" />
+            </Button></Link>
             <a href="/register">
             <Button size="lg" className="gap-4">
-              Sign up here <MoveRight className="size-4" />
+              Sign up  <MoveRight className="size-4" />
             </Button>
             </a>
           </div>
