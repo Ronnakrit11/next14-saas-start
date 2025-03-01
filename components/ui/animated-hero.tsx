@@ -30,7 +30,7 @@ function Hero() {
   return (
     <div className="w-full">
       <div className="container mx-auto">
-        <div className="flex flex-col items-center justify-center gap-8 py-2 lg:py-7  ">
+        <div className="flex flex-col items-center justify-center gap-8 py-9 lg:py-7  ">
          
           <div className="flex flex-col gap-2">
           <UpgradeBanner/>
