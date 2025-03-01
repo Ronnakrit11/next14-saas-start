@@ -9,10 +9,14 @@ import Testimonials from "@/components/sections/testimonials";
 import  { Hero } from "@/components/ui/animated-hero";
 
 
+
+
 export default function IndexPage() {
   return (
     <>
+   
       <Hero />
+     
       <PreviewLanding />
       <Powered />
       <BentoGrid />

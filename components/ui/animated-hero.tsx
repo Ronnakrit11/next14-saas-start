@@ -7,6 +7,7 @@ import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import { RainbowButton } from "@/components/ui/rainbow-button";
+import { UpgradeBanner } from "./upgrade-banner";
 
 function Hero() {
   const [titleNumber, setTitleNumber] = useState(0);
@@ -29,14 +30,13 @@ function Hero() {
   return (
     <div className="w-full">
       <div className="container mx-auto">
-        <div className="flex flex-col items-center justify-center gap-8 py-20 lg:py-7 ">
-          <div>
-            <RainbowButton>
-              Let&apos;s get start<MoveRight className="size-3" />
-            </RainbowButton>
-          </div>
-          <div className="flex flex-col gap-4">
+        <div className="flex flex-col items-center justify-center gap-8 py-2 lg:py-7  ">
+         
+          <div className="flex flex-col gap-2">
+          <UpgradeBanner/>
+          <br />
             <h1 className="font-regular max-w-2xl text-center text-4xl tracking-tighter md:text-6xl">
+              
               <span className="text-spektr-cyan-50">Make Your Trading </span>
               <span className="relative flex w-full justify-center overflow-hidden text-center md:pb-4 md:pt-1">
                 &nbsp;
