@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { RainbowButton } from "@/components/ui/rainbow-button";
 import { UpgradeBanner } from "./upgrade-banner";
 
+
+
 function Hero() {
   const [titleNumber, setTitleNumber] = useState(0);
   const titles = useMemo(
@@ -34,6 +36,9 @@ function Hero() {
          
           <div className="flex flex-col gap-2">
           <UpgradeBanner/>
+          
+          
+          
           <br />
             <h1 className="font-regular max-w-2xl text-center text-4xl tracking-tighter md:text-6xl">
               
