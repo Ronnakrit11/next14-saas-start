@@ -20,11 +20,11 @@ export default async function DashboardPage() {
       />
       <EmptyPlaceholder>
         <EmptyPlaceholder.Icon name="post" />
-        <EmptyPlaceholder.Title>No content created</EmptyPlaceholder.Title>
+        <EmptyPlaceholder.Title>No Deals Created</EmptyPlaceholder.Title>
         <EmptyPlaceholder.Description>
-          You don&apos;t have any content yet. Start creating content.
+          You don&apos;t have any deals yet. Start creating deals.
         </EmptyPlaceholder.Description>
-        <Button>Add Content</Button>
+        <Button>Add deals</Button>
       </EmptyPlaceholder>
     </>
   );
