@@ -111,11 +111,11 @@ export const Icons = {
   lineChart: LineChart,
   logo: ({ className, ...props }: LogoProps) => (
     <Image
-      src="/nextgen2.png"
+      src="/flogo.png"
       alt="Logo"
-      width={50}
-      height={50}
-      className={cn("size-14", className)}
+      width={70}
+      height={70}
+      className={cn("size-19", className)}
       {...props}
     />
   ),
