@@ -110,22 +110,24 @@ export const Icons = {
   laptop: Laptop,
   lineChart: LineChart,
   logo: ({ className, ...props }: LogoProps) => (
-    <Image
-      src="/flogo.png"
-      alt="Logo"
-      width={70}
-      height={70}
-      className={cn("size-19 dark:hidden", className)}
-      {...props}
-    />
-    <Image
-      src="/flogo1.png"
-      alt="Logo"
-      width={70}
-      height={70}
-      className={cn("size-19 hidden dark:block", className)}
-      {...props}
-    />
+    <>
+      <Image
+        src="/flogo.png"
+        alt="Logo"
+        width={70}
+        height={70}
+        className={cn("size-19 dark:hidden", className)}
+        {...props}
+      />
+      <Image
+        src="/flogo1.png"
+        alt="Logo"
+        width={70}
+        height={70}
+        className={cn("size-19 hidden dark:block", className)}
+        {...props}
+      />
+    </>
   ),
   mail: Mail,
   media: ImageIcon,
