@@ -56,11 +56,9 @@ function CheckCircleIcon(props: React.SVGProps<SVGSVGElement>) {
 
 const defaultItems: TiltedScrollItem[] = [
   { id: "1", text: "Fast" },
-  { id: "2", text: "Scalable" },
+  { id: "2", text: "100% Secure" },
   { id: "3", text: "Convenience" },
-  { id: "4", text: "More winrate" },
-  { id: "5", text: "Decrease drawdown" },
-  { id: "6", text: "Special indicator" },
-  { id: "7", text: "Darkpool data" },
+  { id: "4", text: "Low Fee" },
+ 
   
 ]
