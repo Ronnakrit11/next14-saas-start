@@ -14,6 +14,11 @@ export const sidebarLinks: SidebarNavItem[] = [
       },
       { href: "/dashboard", icon: "dashboard", title: "Dashboard" },
       {
+        href: "/dashboard/create-deal",
+        icon: "add",
+        title: "สร้างดีล",
+      },
+      {
         href: "/dashboard/billing",
         icon: "billing",
         title: "Billing",
