@@ -115,7 +115,15 @@ export const Icons = {
       alt="Logo"
       width={70}
       height={70}
-      className={cn("size-19", className)}
+      className={cn("size-19 dark:hidden", className)}
+      {...props}
+    />
+    <Image
+      src="/flogo1.png"
+      alt="Logo"
+      width={70}
+      height={70}
+      className={cn("size-19 hidden dark:block", className)}
       {...props}
     />
   ),
