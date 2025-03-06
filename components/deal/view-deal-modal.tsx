@@ -54,7 +54,7 @@ export function ViewDealModal({ deal, showModal, setShowModal }: ViewDealModalPr
             </div>
             <div>
               <h4 className="text-sm font-medium text-muted-foreground">Deal ID</h4>
-              <p className="text-base font-mono">{deal.id}</p>
+              <p className="font-mono text-base">{deal.id}</p>
             </div>
           </div>
         </div>
