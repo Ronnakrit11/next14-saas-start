@@ -38,10 +38,12 @@ export async function POST(req: Request) {
       });
     }
 
+    // Force status to PENDING for new deals
     const deal = await prisma.deal.create({
       data: {
         title: body.title,
         price: parseFloat(body.price),
+        status: "PENDING", // Always set to PENDING for new deals
         userId: user.id,
       },
     });

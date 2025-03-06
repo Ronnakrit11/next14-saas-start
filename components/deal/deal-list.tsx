@@ -78,6 +78,11 @@ export function DealList() {
     }
   };
 
+  const handlePay = async (deal: Deal) => {
+    // TODO: Implement payment logic
+    toast.info("Payment functionality coming soon!");
+  };
+
   const onEditSuccess = (updatedDeal: Deal) => {
     setDeals(deals.map(deal => deal.id === updatedDeal.id ? updatedDeal : deal));
     setShowEditModal(false);
@@ -115,6 +120,16 @@ export function DealList() {
                 <TableCell>{formatDate(deal.createdAt)}</TableCell>
                 <TableCell className="text-right">
                   <div className="flex justify-end gap-2">
+                    {deal.status === "PENDING" && (
+                      <Button
+                        variant="default"
+                        size="sm"
+                        onClick={() => handlePay(deal)}
+                      >
+                        <Icons.billing className="size-4" />
+                        <span className="sr-only">Pay</span>
+                      </Button>
+                    )}
                     <Button
                       variant="outline"
                       size="sm"
@@ -127,6 +142,7 @@ export function DealList() {
                       variant="outline"
                       size="sm"
                       onClick={() => handleEdit(deal)}
+                      disabled={deal.status === "PAID"}
                     >
                       <Icons.settings className="size-4" />
                       <span className="sr-only">Edit</span>
@@ -135,6 +151,7 @@ export function DealList() {
                       variant="destructive"
                       size="sm"
                       onClick={() => handleDelete(deal.id)}
+                      disabled={deal.status === "PAID"}
                     >
                       <Icons.trash className="size-4" />
                       <span className="sr-only">Delete</span>

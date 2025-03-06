@@ -49,6 +49,22 @@ export async function PATCH(
       });
     }
 
+    // Prevent editing if deal is already paid
+    if (existingDeal.status === "PAID") {
+      return new Response(JSON.stringify({ message: "Cannot edit a paid deal" }), {
+        status: 403,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
+    // Prevent changing status to PAID
+    if (body.status === "PAID") {
+      return new Response(JSON.stringify({ message: "Status cannot be changed to PAID manually" }), {
+        status: 403,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
     const updatedDeal = await prisma.deal.update({
       where: {
         id: params.id,
@@ -56,7 +72,7 @@ export async function PATCH(
       data: {
         title: body.title,
         price: parseFloat(body.price),
-        status: body.status || "PENDING",
+        status: "PENDING", // Force status to remain PENDING
       },
     });
 
@@ -138,6 +154,14 @@ export async function DELETE(
     if (!existingDeal) {
       return new Response(JSON.stringify({ message: "Deal not found" }), {
         status: 404,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
+    // Prevent deleting if deal is already paid
+    if (existingDeal.status === "PAID") {
+      return new Response(JSON.stringify({ message: "Cannot delete a paid deal" }), {
+        status: 403,
         headers: { "Content-Type": "application/json" },
       });
     }

@@ -45,6 +45,18 @@ export function EditDealForm({ deal, onSuccess }: EditDealFormProps) {
   });
 
   async function onSubmit(data: DealFormValues) {
+    // Prevent editing if deal is already paid
+    if (deal.status === "PAID") {
+      toast.error("Cannot edit a paid deal");
+      return;
+    }
+
+    // Prevent changing status to PAID
+    if (data.status === "PAID") {
+      toast.error("Status cannot be changed to PAID manually");
+      return;
+    }
+
     setIsLoading(true);
 
     try {
@@ -53,7 +65,10 @@ export function EditDealForm({ deal, onSuccess }: EditDealFormProps) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          ...data,
+          status: "PENDING", // Force status to remain PENDING
+        }),
       });
 
       const responseData = await response.json();
@@ -81,7 +96,11 @@ export function EditDealForm({ deal, onSuccess }: EditDealFormProps) {
             <FormItem>
               <FormLabel>Title</FormLabel>
               <FormControl>
-                <Input placeholder="Enter title" {...field} />
+                <Input 
+                  placeholder="Enter title" 
+                  {...field} 
+                  disabled={deal.status === "PAID"}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -99,6 +118,7 @@ export function EditDealForm({ deal, onSuccess }: EditDealFormProps) {
                   type="number"
                   placeholder="Enter price"
                   {...field}
+                  disabled={deal.status === "PAID"}
                 />
               </FormControl>
               <FormMessage />
@@ -112,7 +132,11 @@ export function EditDealForm({ deal, onSuccess }: EditDealFormProps) {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Status</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select 
+                onValueChange={field.onChange} 
+                defaultValue={field.value}
+                disabled={true} // Always disable status selection
+              >
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Select a status" />
@@ -120,7 +144,7 @@ export function EditDealForm({ deal, onSuccess }: EditDealFormProps) {
                 </FormControl>
                 <SelectContent>
                   <SelectItem value="PENDING">Pending</SelectItem>
-                  <SelectItem value="PAID">Paid</SelectItem>
+                  <SelectItem value="PAID" disabled>Paid</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
@@ -128,11 +152,11 @@ export function EditDealForm({ deal, onSuccess }: EditDealFormProps) {
           )}
         />
 
-        <Button type="submit" disabled={isLoading}>
+        <Button type="submit" disabled={isLoading || deal.status === "PAID"}>
           {isLoading && (
             <Icons.spinner className="mr-2 size-4 animate-spin" />
           )}
-          Save Changes
+          {deal.status === "PAID" ? "Cannot Edit Paid Deal" : "Save Changes"}
         </Button>
       </form>
     </Form>

@@ -17,7 +17,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Icons } from "@/components/shared/icons";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 
 interface DealFormProps {
   onSuccess?: () => void;
@@ -31,7 +30,7 @@ export function DealForm({ onSuccess }: DealFormProps) {
     defaultValues: {
       title: "",
       price: "",
-      status: "PENDING",
+      status: "PENDING", // Force PENDING status for new deals
     },
   });
 
@@ -39,12 +38,18 @@ export function DealForm({ onSuccess }: DealFormProps) {
     setIsLoading(true);
 
     try {
+      // Force status to PENDING for new deals
+      const formData = {
+        ...data,
+        status: "PENDING",
+      };
+
       const response = await fetch("/api/deals", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(formData),
       });
 
       const responseData = await response.json();
@@ -97,28 +102,6 @@ export function DealForm({ onSuccess }: DealFormProps) {
                   {...field}
                 />
               </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="status"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Status</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select a status" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="PENDING">Pending</SelectItem>
-                  <SelectItem value="PAID">Paid</SelectItem>
-                </SelectContent>
-              </Select>
               <FormMessage />
             </FormItem>
           )}
