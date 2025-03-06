@@ -14,7 +14,7 @@ export function CreateDealModal({ showModal, setShowModal }: CreateDealModalProp
     <Modal showModal={showModal} setShowModal={setShowModal}>
       <div className="w-full">
         <div className="flex flex-col items-center justify-center space-y-3 border-b bg-background px-4 py-6 pt-8 text-center md:px-16">
-          <h3 className="font-urban text-xl font-bold sm:text-2xl">Create New Deal</h3>
+          <h3 className="font-urban text-2xl font-bold">Create New Deal</h3>
           <p className="text-sm text-muted-foreground">
             Fill in the details below to create a new deal
           </p>

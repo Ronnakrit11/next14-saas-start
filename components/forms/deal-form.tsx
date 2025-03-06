@@ -82,11 +82,7 @@ export function DealForm({ onSuccess }: DealFormProps) {
             <FormItem>
               <FormLabel>บริการ/สินค้า</FormLabel>
               <FormControl>
-                <Input 
-                  placeholder="Enter service or product name" 
-                  {...field}
-                  className="w-full sm:w-[400px]" 
-                />
+                <Input placeholder="Enter service or product name" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -104,7 +100,6 @@ export function DealForm({ onSuccess }: DealFormProps) {
                   type="number"
                   placeholder="Enter price"
                   {...field}
-                  className="w-full sm:w-[400px]"
                 />
               </FormControl>
               <FormMessage />
@@ -112,7 +107,7 @@ export function DealForm({ onSuccess }: DealFormProps) {
           )}
         />
 
-        <Button type="submit" disabled={isLoading} className="w-full sm:w-auto">
+        <Button type="submit" disabled={isLoading}>
           {isLoading && (
             <Icons.spinner className="mr-2 size-4 animate-spin" />
           )}
