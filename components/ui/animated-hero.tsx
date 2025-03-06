@@ -9,8 +9,6 @@ import { Button } from "@/components/ui/button";
 import { RainbowButton } from "@/components/ui/rainbow-button";
 import { UpgradeBanner } from "./upgrade-banner";
 
-
-
 function Hero() {
   const [titleNumber, setTitleNumber] = useState(0);
   const titles = useMemo(
@@ -69,9 +67,9 @@ function Hero() {
               </span>
             </h1>
 <br />
-            <p className="text-l max-w-2xl text-center leading-relaxed tracking-tight text-muted-foreground md:text-xl">
+            <p className="max-w-2xl text-center font-ibm-plex-sans-thai text-lg leading-relaxed tracking-tight text-muted-foreground md:text-xl">
               จบทุกปัญหาในการจ้างงาน ปัญหาการโดนโกง 
-              ทิ้งงาน  ปลอดภัยทั้งผู้จ้างเเละผู้รับจ้าง 
+              ทิ้งงาน  ปลอดภัยทั้งผู้จ้างเเละผู้รับจ้าง
             </p>
           </div>
           <div className="flex flex-row gap-3">

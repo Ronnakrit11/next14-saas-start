@@ -1,5 +1,6 @@
 import "@/styles/globals.css";
 
+import { IBM_Plex_Sans_Thai } from "next/font/google";
 import { fontGeist, fontHeading, fontSans, fontUrban } from "@/assets/fonts";
 import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "next-themes";
@@ -9,6 +10,12 @@ import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "@/components/analytics";
 import ModalProvider from "@/components/modals/providers";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
+
+const fontIBMPlexSansThai = IBM_Plex_Sans_Thai({
+  weight: ['100', '200', '300', '400', '500', '600', '700'],
+  subsets: ['thai'],
+  variable: '--font-ibm-plex-sans-thai',
+});
 
 interface RootLayoutProps {
   children: React.ReactNode;
@@ -27,6 +34,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           fontUrban.variable,
           fontHeading.variable,
           fontGeist.variable,
+          fontIBMPlexSansThai.variable,
         )}
       >
         <SessionProvider>

@@ -20,6 +20,13 @@ const config = {
       padding: ".8rem",
     },
     extend: {
+      fontFamily: {
+        sans: ["var(--font-sans)", ...fontFamily.sans],
+        urban: ["var(--font-urban)", ...fontFamily.sans],
+        heading: ["var(--font-heading)", ...fontFamily.sans],
+        geist: ["var(--font-geist)", ...fontFamily.sans],
+        "ibm-plex-sans-thai": ["var(--font-ibm-plex-sans-thai)", ...fontFamily.sans],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -57,14 +64,8 @@ const config = {
       },
       borderRadius: {
         lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
+        md: "calc(var(--radius) - 2px)", 
         sm: "calc(var(--radius) - 4px)",
-      },
-      fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans],
-        urban: ["var(--font-urban)", ...fontFamily.sans],
-        heading: ["var(--font-heading)", ...fontFamily.sans],
-        geist: ["var(--font-geist)", ...fontFamily.sans],
       },
       keyframes: {
         "accordion-down": {
