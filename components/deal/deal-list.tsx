@@ -39,9 +39,7 @@ export function DealList() {
     fetchDeals();
   }, []);
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+
 
   return (
     <div className="rounded-md border">

@@ -20,7 +20,7 @@ export default function Features() {
 
           <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {features.map((feature) => {
-              const Icon = Icons[feature.icon || "nextjs"];
+              const Icon = Icons[feature.icon || "arrowRight"];
               return (
                 <div
                   className="group relative overflow-hidden rounded-2xl border bg-background p-5 md:p-8"
@@ -32,7 +32,7 @@ export default function Features() {
                   />
                   <div className="relative">
                     <div className="relative flex size-12 rounded-2xl border border-border shadow-sm *:relative *:m-auto *:size-6">
-                      <Icon />
+                      {Icon && <Icon />}
                     </div>
 
                     <p className="mt-6 pb-6 text-muted-foreground">
