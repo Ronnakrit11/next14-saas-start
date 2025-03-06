@@ -69,7 +69,7 @@ function Hero() {
               </span>
             </h1>
 <br />
-            <p className="max-w-2xl text-center text-l leading-relaxed tracking-tight text-muted-foreground md:text-xl">
+            <p className="text-l max-w-2xl text-center leading-relaxed tracking-tight text-muted-foreground md:text-xl">
               จบทุกปัญหาในการจ้างงาน ปัญหาการโดนโกง 
               ทิ้งงาน  ปลอดภัยทั้งผู้จ้างเเละผู้รับจ้าง 
             </p>
