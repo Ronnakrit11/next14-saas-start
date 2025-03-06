@@ -15,6 +15,11 @@ enum UserRole {
   USER
 }
 
+enum DealStatus {
+  PENDING
+  PAID
+}
+
 model Account {
   id                String   @id @default(cuid())
   userId            String
@@ -81,13 +86,14 @@ model VerificationToken {
 }
 
 model Deal {
-  id        String   @id @default(cuid())
+  id        String     @id @default(cuid())
   title     String
   price     Float
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @default(now()) @map(name: "updated_at")
+  status    DealStatus @default(PENDING)
+  createdAt DateTime   @default(now()) @map(name: "created_at")
+  updatedAt DateTime   @default(now()) @map(name: "updated_at")
   userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
   @@map(name: "deals")

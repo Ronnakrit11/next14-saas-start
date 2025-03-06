@@ -56,6 +56,7 @@ export async function PATCH(
       data: {
         title: body.title,
         price: parseFloat(body.price),
+        status: body.status || "PENDING",
       },
     });
 

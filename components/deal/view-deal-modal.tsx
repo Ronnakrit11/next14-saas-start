@@ -3,11 +3,13 @@
 import { Dispatch, SetStateAction } from "react";
 import { Modal } from "@/components/ui/modal";
 import { formatDate } from "@/lib/utils";
+import { Badge } from "../ui/badge";
 
 interface Deal {
   id: string;
   title: string;
   price: number;
+  status: "PENDING" | "PAID";
   createdAt: string;
 }
 
@@ -39,6 +41,12 @@ export function ViewDealModal({ deal, showModal, setShowModal }: ViewDealModalPr
             <div>
               <h4 className="text-sm font-medium text-muted-foreground">Price</h4>
               <p className="text-base">฿{deal.price.toLocaleString()}</p>
+            </div>
+            <div>
+              <h4 className="text-sm font-medium text-muted-foreground">Status</h4>
+              <Badge variant={deal.status === "PAID" ? "default" : "secondary"}>
+                {deal.status}
+              </Badge>
             </div>
             <div>
               <h4 className="text-sm font-medium text-muted-foreground">Created At</h4>

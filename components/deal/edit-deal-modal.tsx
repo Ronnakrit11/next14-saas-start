@@ -2,11 +2,13 @@
 
 import { Dispatch, SetStateAction } from "react";
 import { Modal } from "@/components/ui/modal";
-import { EditDealForm } from "../forms/edit-deal-form";
+import { EditDealForm } from "@/components/forms/edit-deal-form";
+
 interface Deal {
   id: string;
   title: string;
   price: number;
+  status: "PENDING" | "PAID";
   createdAt: string;
 }
 

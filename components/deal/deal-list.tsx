@@ -15,11 +15,13 @@ import { Icons } from "@/components/shared/icons";
 import { toast } from "sonner";
 import { EditDealModal } from "./edit-deal-modal";
 import { ViewDealModal } from "./view-deal-modal";
+import { Badge } from "../ui/badge";
 
 interface Deal {
   id: string;
   title: string;
   price: number;
+  status: "PENDING" | "PAID";
   createdAt: string;
 }
 
@@ -95,6 +97,7 @@ export function DealList() {
             <TableRow>
               <TableHead>Title</TableHead>
               <TableHead>Price</TableHead>
+              <TableHead>Status</TableHead>
               <TableHead>Created At</TableHead>
               <TableHead className="text-right">Actions</TableHead>
             </TableRow>
@@ -104,6 +107,11 @@ export function DealList() {
               <TableRow key={deal.id}>
                 <TableCell>{deal.title}</TableCell>
                 <TableCell>฿{deal.price.toLocaleString()}</TableCell>
+                <TableCell>
+                  <Badge variant={deal.status === "PAID" ? "default" : "secondary"}>
+                    {deal.status}
+                  </Badge>
+                </TableCell>
                 <TableCell>{formatDate(deal.createdAt)}</TableCell>
                 <TableCell className="text-right">
                   <div className="flex justify-end gap-2">
@@ -137,7 +145,7 @@ export function DealList() {
             ))}
             {deals.length === 0 && (
               <TableRow>
-                <TableCell colSpan={4} className="text-center">
+                <TableCell colSpan={5} className="text-center">
                   No deals found
                 </TableCell>
               </TableRow>

@@ -9,6 +9,7 @@ export const dealFormSchema = z.object({
   }).refine((val) => !isNaN(parseFloat(val)), {
     message: "Price must be a valid number",
   }),
+  status: z.enum(["PENDING", "PAID"]).optional(),
 });
 
 export type DealFormValues = z.infer<typeof dealFormSchema>;
