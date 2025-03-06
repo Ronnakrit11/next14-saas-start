@@ -59,6 +59,7 @@ const defaultItems: TiltedScrollItem[] = [
   { id: "2", text: "100% Secure" },
   { id: "3", text: "Convenience" },
   { id: "4", text: "Low Fee" },
+  { id: "5", text: "Flexible" },
  
   
 ]
