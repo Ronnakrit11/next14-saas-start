@@ -68,12 +68,10 @@ function Hero() {
                 ))}
               </span>
             </h1>
-
-            <p className="max-w-2xl text-center text-lg leading-relaxed tracking-tight text-muted-foreground md:text-xl">
-              Managing a small business today is already tough. Avoid further
-              complications by ditching outdated, tedious trade methods. Our
-              goal is to streamline SMB trade, making it easier and faster than
-              ever.
+<br />
+            <p className="max-w-2xl text-center text-l leading-relaxed tracking-tight text-muted-foreground md:text-xl">
+              จบทุกปัญหาในการจ้างงาน ปัญหาการโดนโกง 
+              ทิ้งงาน  ปลอดภัยทั้งผู้จ้างเเละผู้รับจ้าง 
             </p>
           </div>
           <div className="flex flex-row gap-3">

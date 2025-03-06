@@ -33,7 +33,7 @@ const SettingsFilled = ({ className }: { className?: string }) => (
 
 export function UpgradeBanner({
   buttonText = "Upgrade to Pro",
-  description = "for 2x more CPUs and faster builds",
+  description = "for 2x more deals",
   onClose,
   onClick,
   className
