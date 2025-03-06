@@ -14,7 +14,7 @@ import { UpgradeBanner } from "./upgrade-banner";
 function Hero() {
   const [titleNumber, setTitleNumber] = useState(0);
   const titles = useMemo(
-    () => ["Fastest", "Smart", "perfomance", ],
+    () => ["Fair", "Secure", "Fast", ],
     []
   );
 
@@ -42,7 +42,7 @@ function Hero() {
           <br />
             <h1 className="font-regular max-w-2xl text-center text-4xl tracking-tighter md:text-6xl">
               
-              <span className="text-spektr-cyan-50">Make Your Trading </span>
+              <span className="text-spektr-cyan-50">Make Your Deal </span>
               <span className="relative flex w-full justify-center overflow-hidden text-center md:pb-4 md:pt-1">
                 &nbsp;
                 {titles.map((title, index) => (
