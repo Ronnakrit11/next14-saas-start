@@ -1,4 +1,4 @@
-"use client";
+
 
 import Image from "next/image";
 import { cn } from "@/lib/utils";
@@ -40,7 +40,6 @@ import {
   type LucideIcon,
   type LucideProps,
 } from "lucide-react";
-import { SVGProps } from "react";
 
 export type Icon = LucideIcon;
 
@@ -69,8 +68,7 @@ const Logo = ({ className, ...props }: LogoProps) => (
   </>
 );
 
-
-export const Icons = {
+const icons = {
   add: Plus,
   arrowRight: ArrowRight,
   arrowUpRight: ArrowUpRight,
@@ -142,6 +140,8 @@ export const Icons = {
   trash: Trash,
   user: User,
   warning: AlertTriangle,
-};
+} as const;
 
-export type IconKeys = keyof typeof Icons;
+export type IconKeys = keyof typeof icons;
+
+export const Icons = icons;
