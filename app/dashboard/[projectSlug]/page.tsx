@@ -39,7 +39,7 @@ export default async function ProjectPage({ params }: { params: { projectSlug: s
   return (
     <MaxWidthWrapper>
       <div className="py-10">
-        <div className="flex items-center justify-between mb-8">
+        <div className="mb-8 flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold">{project.title}</h1>
             <p className="mt-2 text-muted-foreground">
@@ -60,7 +60,7 @@ export default async function ProjectPage({ params }: { params: { projectSlug: s
                 <div className="flex items-center justify-between">
                   <div>
                     <h3 className="font-semibold">{deal.title}</h3>
-                    <p className="text-sm text-muted-foreground mt-1">
+                    <p className="mt-1 text-sm text-muted-foreground">
                       ฿{deal.price.toLocaleString()}
                     </p>
                   </div>

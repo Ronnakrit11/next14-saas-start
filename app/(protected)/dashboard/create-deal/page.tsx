@@ -4,7 +4,6 @@ import { getCurrentUser } from "@/lib/session";
 import { constructMetadata } from "@/lib/utils";
 import { DashboardHeader } from "@/components/dashboard/header";
 import { DealList } from "@/components/deal/deal-list";
-import { CreateDealButton } from "@/components/deal/create-deal-button";
 
 export const metadata = constructMetadata({
   title: "Create Deal – SaaS Starter",
@@ -21,9 +20,7 @@ export default async function CreateDealPage() {
       <DashboardHeader
         heading="Create Deal"
         text="Create and manage your deals."
-      >
-        <CreateDealButton />
-      </DashboardHeader>
+      />
       <div className="grid gap-8">
         <DealList />
       </div>
