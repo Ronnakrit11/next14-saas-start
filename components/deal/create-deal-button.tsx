@@ -5,7 +5,11 @@ import { Button } from "@/components/ui/button";
 import { Icons } from "@/components/shared/icons";
 import { CreateDealModal } from "./create-deal-modal";
 
-export function CreateDealButton() {
+interface CreateDealButtonProps {
+  projectId: string;
+}
+
+export function CreateDealButton({ projectId }: CreateDealButtonProps) {
   const [showNewDealModal, setShowNewDealModal] = useState(false);
 
   return (
@@ -17,6 +21,7 @@ export function CreateDealButton() {
       <CreateDealModal 
         showModal={showNewDealModal} 
         setShowModal={setShowNewDealModal} 
+        projectId={projectId}
       />
     </>
   );

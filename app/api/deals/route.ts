@@ -2,92 +2,18 @@ import { auth } from "@/auth";
 import { prisma } from "@/lib/db";
 import { dealFormSchema } from "@/lib/validations/deal";
 import { z } from "zod";
+import { NextResponse } from "next/server";
 
-export async function POST(req: Request) {
-  try {
-    const session = await auth();
-
-    if (!session?.user || !session?.user.id) {
-      return new Response(JSON.stringify({ message: "Unauthorized" }), {
-        status: 401,
-        headers: { "Content-Type": "application/json" },
-      });
-    }
-
-    // Verify user exists in database
-    const user = await prisma.user.findUnique({
-      where: {
-        id: session.user.id,
-      },
-    });
-
-    if (!user) {
-      return new Response(JSON.stringify({ message: "User not found" }), {
-        status: 404,
-        headers: { "Content-Type": "application/json" },
-      });
-    }
-
-    const json = await req.json();
-    const body = dealFormSchema.parse(json);
-
-    if (!body.title || !body.price) {
-      return new Response(JSON.stringify({ message: "Missing required fields" }), {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      });
-    }
-
-    // Force status to PENDING for new deals
-    const deal = await prisma.deal.create({
-      data: {
-        title: body.title,
-        price: parseFloat(body.price),
-        status: "PENDING", // Always set to PENDING for new deals
-        userId: user.id,
-      },
-    });
-
-    return new Response(JSON.stringify({ 
-      message: "Deal created successfully",
-      deal 
-    }), {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    });
-
-  } catch (error) {
-    console.error("Deal creation error:", error);
-
-    if (error instanceof z.ZodError) {
-      return new Response(JSON.stringify({ 
-        message: "Validation error", 
-        errors: error.errors 
-      }), {
-        status: 422,
-        headers: { "Content-Type": "application/json" },
-      });
-    }
-
-    return new Response(JSON.stringify({ 
-      message: "Internal Server Error",
-      error: error instanceof Error ? error.message : "Unknown error"
-    }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
-  }
-}
 
 export async function GET(req: Request) {
   try {
     const session = await auth();
 
     if (!session?.user || !session?.user.id) {
-      return new Response(JSON.stringify({ message: "Unauthorized" }), {
-        status: 401,
-        headers: { "Content-Type": "application/json" },
-      });
+      return NextResponse.json(
+        { message: "Unauthorized" },
+        { status: 401 }
+      );
     }
 
     const deals = await prisma.deal.findMany({
@@ -99,15 +25,95 @@ export async function GET(req: Request) {
       },
     });
 
-    return new Response(JSON.stringify(deals), {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    });
+    return NextResponse.json(deals);
   } catch (error) {
     console.error("Error fetching deals:", error);
-    return new Response(JSON.stringify({ message: "Error fetching deals" }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
+    return NextResponse.json(
+      { message: "Error fetching deals" },
+      { status: 500 }
+    );
+  }
+}
+
+export async function POST(req: Request) {
+  try {
+    const session = await auth();
+
+    if (!session?.user || !session?.user.id) {
+      return NextResponse.json(
+        { message: "Unauthorized" },
+        { status: 401 }
+      );
+    }
+
+    // Verify user exists in database
+    const user = await prisma.user.findUnique({
+      where: {
+        id: session.user.id,
+      },
     });
+
+    if (!user) {
+      return NextResponse.json(
+        { message: "User not found" },
+        { status: 404 }
+      );
+    }
+
+    const json = await req.json();
+    const body = dealFormSchema.parse(json);
+
+    if (!body.title || !body.price || !json.projectId) {
+      return NextResponse.json(
+        { message: "Missing required fields" },
+        { status: 400 }
+      );
+    }
+
+    // Verify project exists and belongs to user
+    const project = await prisma.project.findFirst({
+      where: {
+        id: json.projectId,
+        userId: user.id,
+      },
+    });
+
+    if (!project) {
+      return NextResponse.json(
+        { message: "Project not found" },
+        { status: 404 }
+      );
+    }
+
+    // Force status to PENDING for new deals
+    const deal = await prisma.deal.create({
+      data: {
+        title: body.title,
+        price: parseFloat(body.price),
+        status: "PENDING", // Always set to PENDING for new deals
+        userId: user.id,
+        projectId: project.id,
+      },
+    });
+
+    return NextResponse.json({ 
+      message: "Deal created successfully",
+      deal 
+    });
+
+  } catch (error) {
+    console.error("Deal creation error:", error);
+
+    if (error instanceof z.ZodError) {
+      return NextResponse.json({ 
+        message: "Validation error", 
+        errors: error.errors 
+      }, { status: 422 });
+    }
+
+    return NextResponse.json({ 
+      message: "Internal Server Error",
+      error: error instanceof Error ? error.message : "Unknown error"
+    }, { status: 500 });
   }
 }

@@ -1,6 +1,7 @@
 import { auth } from "@/auth";
 import { prisma } from "@/lib/db";
 import { dealFormSchema } from "@/lib/validations/deal";
+import { NextResponse } from "next/server";
 import { z } from "zod";
 
 export async function GET(
@@ -11,10 +12,10 @@ export async function GET(
     const session = await auth();
 
     if (!session?.user || !session?.user.id) {
-      return new Response(JSON.stringify({ message: "Unauthorized" }), {
-        status: 401,
-        headers: { "Content-Type": "application/json" },
-      });
+      return NextResponse.json(
+        { message: "Unauthorized" },
+        { status: 401 }
+      );
     }
 
     const deal = await prisma.deal.findUnique({
@@ -24,23 +25,20 @@ export async function GET(
     });
 
     if (!deal) {
-      return new Response(JSON.stringify({ message: "Deal not found" }), {
-        status: 404,
-        headers: { "Content-Type": "application/json" },
-      });
+      return NextResponse.json(
+        { message: "Deal not found" },
+        { status: 404 }
+      );
     }
 
-    return new Response(JSON.stringify(deal), {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    });
+    return NextResponse.json(deal);
 
   } catch (error) {
     console.error("Error fetching deal:", error);
-    return new Response(JSON.stringify({ message: "Internal Server Error" }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
+    return NextResponse.json(
+      { message: "Internal Server Error" },
+      { status: 500 }
+    );
   }
 }
 
@@ -52,10 +50,10 @@ export async function PATCH(
     const session = await auth();
 
     if (!session?.user || !session?.user.id) {
-      return new Response(JSON.stringify({ message: "Unauthorized" }), {
-        status: 401,
-        headers: { "Content-Type": "application/json" },
-      });
+      return NextResponse.json(
+        { message: "Unauthorized" },
+        { status: 401 }
+      );
     }
 
     const json = await req.json();
@@ -69,10 +67,10 @@ export async function PATCH(
     });
 
     if (!user) {
-      return new Response(JSON.stringify({ message: "User not found" }), {
-        status: 404,
-        headers: { "Content-Type": "application/json" },
-      });
+      return NextResponse.json(
+        { message: "User not found" },
+        { status: 404 }
+      );
     }
 
     // Verify deal exists and belongs to user
@@ -84,26 +82,26 @@ export async function PATCH(
     });
 
     if (!existingDeal) {
-      return new Response(JSON.stringify({ message: "Deal not found" }), {
-        status: 404,
-        headers: { "Content-Type": "application/json" },
-      });
+      return NextResponse.json(
+        { message: "Deal not found" },
+        { status: 404 }
+      );
     }
 
     // Prevent editing if deal is already paid
     if (existingDeal.status === "PAID") {
-      return new Response(JSON.stringify({ message: "Cannot edit a paid deal" }), {
-        status: 403,
-        headers: { "Content-Type": "application/json" },
-      });
+      return NextResponse.json(
+        { message: "Cannot edit a paid deal" },
+        { status: 403 }
+      );
     }
 
     // Prevent changing status to PAID
     if (body.status === "PAID") {
-      return new Response(JSON.stringify({ message: "Status cannot be changed to PAID manually" }), {
-        status: 403,
-        headers: { "Content-Type": "application/json" },
-      });
+      return NextResponse.json(
+        { message: "Status cannot be changed to PAID manually" },
+        { status: 403 }
+      );
     }
 
     const updatedDeal = await prisma.deal.update({
@@ -117,42 +115,24 @@ export async function PATCH(
       },
     });
 
-    return new Response(
-      JSON.stringify({
-        message: "Deal updated successfully",
-        deal: updatedDeal,
-      }),
-      {
-        status: 200,
-        headers: { "Content-Type": "application/json" },
-      }
-    );
+    return NextResponse.json({
+      message: "Deal updated successfully",
+      deal: updatedDeal,
+    });
   } catch (error) {
     console.error("Deal update error:", error);
 
     if (error instanceof z.ZodError) {
-      return new Response(
-        JSON.stringify({
-          message: "Validation error",
-          errors: error.errors,
-        }),
-        {
-          status: 422,
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+      return NextResponse.json({
+        message: "Validation error",
+        errors: error.errors,
+      }, { status: 422 });
     }
 
-    return new Response(
-      JSON.stringify({
-        message: "Internal Server Error",
-        error: error instanceof Error ? error.message : "Unknown error",
-      }),
-      {
-        status: 500,
-        headers: { "Content-Type": "application/json" },
-      }
-    );
+    return NextResponse.json({
+      message: "Internal Server Error",
+      error: error instanceof Error ? error.message : "Unknown error",
+    }, { status: 500 });
   }
 }
 
@@ -164,10 +144,10 @@ export async function DELETE(
     const session = await auth();
 
     if (!session?.user || !session?.user.id) {
-      return new Response(JSON.stringify({ message: "Unauthorized" }), {
-        status: 401,
-        headers: { "Content-Type": "application/json" },
-      });
+      return NextResponse.json(
+        { message: "Unauthorized" },
+        { status: 401 }
+      );
     }
 
     // Verify user exists in database
@@ -178,10 +158,10 @@ export async function DELETE(
     });
 
     if (!user) {
-      return new Response(JSON.stringify({ message: "User not found" }), {
-        status: 404,
-        headers: { "Content-Type": "application/json" },
-      });
+      return NextResponse.json(
+        { message: "User not found" },
+        { status: 404 }
+      );
     }
 
     // Verify deal exists and belongs to user
@@ -193,18 +173,18 @@ export async function DELETE(
     });
 
     if (!existingDeal) {
-      return new Response(JSON.stringify({ message: "Deal not found" }), {
-        status: 404,
-        headers: { "Content-Type": "application/json" },
-      });
+      return NextResponse.json(
+        { message: "Deal not found" },
+        { status: 404 }
+      );
     }
 
     // Prevent deleting if deal is already paid
     if (existingDeal.status === "PAID") {
-      return new Response(JSON.stringify({ message: "Cannot delete a paid deal" }), {
-        status: 403,
-        headers: { "Content-Type": "application/json" },
-      });
+      return NextResponse.json(
+        { message: "Cannot delete a paid deal" },
+        { status: 403 }
+      );
     }
 
     await prisma.deal.delete({
@@ -213,25 +193,13 @@ export async function DELETE(
       },
     });
 
-    return new Response(
-      JSON.stringify({ message: "Deal deleted successfully" }),
-      {
-        status: 200,
-        headers: { "Content-Type": "application/json" },
-      }
-    );
+    return NextResponse.json({ message: "Deal deleted successfully" });
   } catch (error) {
     console.error("Deal deletion error:", error);
 
-    return new Response(
-      JSON.stringify({
-        message: "Internal Server Error",
-        error: error instanceof Error ? error.message : "Unknown error",
-      }),
-      {
-        status: 500,
-        headers: { "Content-Type": "application/json" },
-      }
-    );
+    return NextResponse.json({
+      message: "Internal Server Error",
+      error: error instanceof Error ? error.message : "Unknown error",
+    }, { status: 500 });
   }
 }

@@ -98,7 +98,10 @@ export default function ProjectSwitcher({
         }),
       });
 
-      if (!response.ok) throw new Error("Failed to create project");
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || "Failed to create project");
+      }
 
       const newProject = await response.json();
       setProjects([...projects, newProject]);
@@ -109,7 +112,7 @@ export default function ProjectSwitcher({
       router.push(`/dashboard/${newProject.slug}`);
     } catch (error) {
       console.error("Error creating project:", error);
-      toast.error("Failed to create project");
+      toast.error(error instanceof Error ? error.message : "Failed to create project");
     }
   };
 

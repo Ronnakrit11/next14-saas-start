@@ -7,9 +7,10 @@ import { DealForm } from "@/components/forms/deal-form";
 interface CreateDealModalProps {
   showModal: boolean;
   setShowModal: Dispatch<SetStateAction<boolean>>;
+  projectId: string;
 }
 
-export function CreateDealModal({ showModal, setShowModal }: CreateDealModalProps) {
+export function CreateDealModal({ showModal, setShowModal, projectId }: CreateDealModalProps) {
   return (
     <Modal showModal={showModal} setShowModal={setShowModal}>
       <div className="w-full">
@@ -21,7 +22,7 @@ export function CreateDealModal({ showModal, setShowModal }: CreateDealModalProp
         </div>
 
         <div className="px-4 py-8 md:px-16">
-          <DealForm onSuccess={() => setShowModal(false)} />
+          <DealForm onSuccess={() => setShowModal(false)} projectId={projectId} />
         </div>
       </div>
     </Modal>

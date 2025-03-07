@@ -20,9 +20,10 @@ import { Icons } from "@/components/shared/icons";
 
 interface DealFormProps {
   onSuccess?: () => void;
+  projectId: string;
 }
 
-export function DealForm({ onSuccess }: DealFormProps) {
+export function DealForm({ onSuccess, projectId }: DealFormProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<DealFormValues>({
@@ -42,6 +43,7 @@ export function DealForm({ onSuccess }: DealFormProps) {
       const formData = {
         ...data,
         status: "PENDING",
+        projectId: projectId
       };
 
       const response = await fetch("/api/deals", {

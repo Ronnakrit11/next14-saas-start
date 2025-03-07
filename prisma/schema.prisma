@@ -86,6 +86,7 @@ model Project {
   updatedAt DateTime @default(now()) @map(name: "updated_at")
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  deals     Deal[]
 
   @@index([userId])
   @@map(name: "projects")
@@ -108,8 +109,11 @@ model Deal {
   createdAt DateTime   @default(now()) @map(name: "created_at")
   updatedAt DateTime   @default(now()) @map(name: "updated_at")
   userId    String
+  projectId String
   user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  project   Project    @relation(fields: [projectId], references: [id], onDelete: Cascade)
 
   @@index([userId])
+  @@index([projectId])
   @@map(name: "deals")
 }
