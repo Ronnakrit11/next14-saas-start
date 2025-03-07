@@ -93,7 +93,7 @@ export function NavBar({ scroll = false }: NavBarProps) {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <Icons.facebook className="size-7" />
+                  <Icons.arrowRight className="size-7" />
                   <span className="sr-only">Facebook</span>
                 </Link>
               </div>

@@ -63,7 +63,7 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
               rel="noreferrer"
               className="font-medium underline underline-offset-4"
             >
-              <Icons.facebook className="size-5" />
+              <Icons.arrowRight className="size-5" />
             </Link>
             <ModeToggle />
           </div>

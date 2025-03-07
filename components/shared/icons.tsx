@@ -40,6 +40,7 @@ import {
   type LucideIcon,
   type LucideProps,
 } from "lucide-react";
+import { SVGProps } from "react";
 
 export type Icon = LucideIcon;
 
@@ -47,19 +48,27 @@ interface LogoProps extends Omit<React.ComponentProps<typeof Image>, 'src' | 'al
   className?: string;
 }
 
-const FacebookIcon = ({ className, ...props }: LucideProps) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 320 512"
-    className={cn("size-4", className)}
-    {...props}
-  >
-    <path
-      fill="currentColor"
-      d="M80 299.3V512h116V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4.4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8h66z"
+const Logo = ({ className, ...props }: LogoProps) => (
+  <>
+    <Image
+      src="/flogo.png"
+      alt="Logo"
+      width={70}
+      height={70}
+      className={cn("size-19 dark:hidden", className)}
+      {...props}
     />
-  </svg>
+    <Image
+      src="/flogo1.png"
+      alt="Logo"
+      width={70}
+      height={70}
+      className={cn("size-19 hidden dark:block", className)}
+      {...props}
+    />
+  </>
 );
+
 
 export const Icons = {
   add: Plus,
@@ -76,7 +85,6 @@ export const Icons = {
   dashboard: LayoutPanelLeft,
   ellipsis: MoreVertical,
   eye: Eye,
-  facebook: FacebookIcon,
   gitHub: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"
@@ -115,26 +123,7 @@ export const Icons = {
   home: Home,
   laptop: Laptop,
   lineChart: LineChart,
-  logo: ({ className, ...props }: LogoProps) => (
-    <>
-      <Image
-        src="/flogo.png"
-        alt="Logo"
-        width={70}
-        height={70}
-        className={cn("size-19 dark:hidden", className)}
-        {...props}
-      />
-      <Image
-        src="/flogo1.png"
-        alt="Logo"
-        width={70}
-        height={70}
-        className={cn("size-19 hidden dark:block", className)}
-        {...props}
-      />
-    </>
-  ),
+  logo: Logo,
   mail: Mail,
   media: ImageIcon,
   messages: MessagesSquare,
@@ -154,3 +143,5 @@ export const Icons = {
   user: User,
   warning: AlertTriangle,
 };
+
+export type IconKeys = keyof typeof Icons;

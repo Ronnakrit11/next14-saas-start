@@ -82,7 +82,7 @@ export default async function HeroLanding() {
               "px-5",
             )}
           >
-            <Icons.facebook className="mr-2 size-4" />
+            <Icons.arrowRight className="mr-2 size-4" />
             <p>Contact Us</p>
           </Link>
         </div>

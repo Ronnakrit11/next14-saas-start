@@ -129,7 +129,7 @@ export function NavMobile() {
 
         <div className="mt-5 flex items-center justify-end space-x-4">
           <Link href="https://www.facebook.com/experts8academy" target="_blank" rel="noreferrer">
-            <Icons.facebook className="size-6" />
+            <Icons.arrowRight className="size-6" />
             <span className="sr-only">Facebook</span>
           </Link>
           <ModeToggle />
