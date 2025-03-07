@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import MaxWidthWrapper from "@/components/shared/max-width-wrapper";
 import { redirect } from "next/navigation";
 import { CreateDealButton } from "@/components/deal/create-deal-button";
+import { DealList } from "@/components/deal/deal-list";
 
 export default async function ProjectPage({ params }: { params: { projectSlug: string } }) {
   const session = await auth();
@@ -55,26 +56,7 @@ export default async function ProjectPage({ params }: { params: { projectSlug: s
               <p className="text-muted-foreground">No deals created yet.</p>
             </Card>
           ) : (
-            deals.map((deal) => (
-              <Card key={deal.id} className="p-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="font-semibold">{deal.title}</h3>
-                    <p className="mt-1 text-sm text-muted-foreground">
-                      ฿{deal.price.toLocaleString()}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <Badge variant={deal.status === "PAID" ? "default" : "secondary"}>
-                      {deal.status}
-                    </Badge>
-                    <p className="text-sm text-muted-foreground">
-                      {formatDate(deal.createdAt.toISOString())}
-                    </p>
-                  </div>
-                </div>
-              </Card>
-            ))
+            <DealList />
           )}
         </div>
       </div>
