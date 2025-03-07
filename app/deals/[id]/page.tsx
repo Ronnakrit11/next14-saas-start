@@ -71,7 +71,7 @@ export default async function DealPage({ params }: { params: { id: string } }) {
             {deal.status === "PENDING" && (
               <div className="flex justify-end">
                 <Button size="lg">
-                  Pay Now
+                  Contact FairFlows
                 </Button>
               </div>
             )}
