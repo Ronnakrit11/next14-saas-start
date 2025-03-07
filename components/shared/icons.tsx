@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import {
@@ -30,6 +32,7 @@ import {
   Puzzle,
   Search,
   Settings,
+  Share,
   SunMedium,
   Trash,
   User,
@@ -43,6 +46,20 @@ export type Icon = LucideIcon;
 interface LogoProps extends Omit<React.ComponentProps<typeof Image>, 'src' | 'alt'> {
   className?: string;
 }
+
+const FacebookIcon = ({ className, ...props }: LucideProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 320 512"
+    className={cn("size-4", className)}
+    {...props}
+  >
+    <path
+      fill="currentColor"
+      d="M80 299.3V512h116V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4.4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8h66z"
+    />
+  </svg>
+);
 
 export const Icons = {
   add: Plus,
@@ -59,18 +76,7 @@ export const Icons = {
   dashboard: LayoutPanelLeft,
   ellipsis: MoreVertical,
   eye: Eye,
-  facebook: ({ ...props }: LucideProps) => (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 320 512"
-      fill="currentColor"
-      {...props}
-    >
-      <path
-        d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"
-      />
-    </svg>
-  ),
+  facebook: FacebookIcon,
   gitHub: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"
@@ -141,6 +147,7 @@ export const Icons = {
   puzzle: Puzzle,
   search: Search,
   settings: Settings,
+  share: Share,
   spinner: Loader2,
   sun: SunMedium,
   trash: Trash,

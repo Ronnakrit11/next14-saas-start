@@ -3,6 +3,47 @@ import { prisma } from "@/lib/db";
 import { dealFormSchema } from "@/lib/validations/deal";
 import { z } from "zod";
 
+export async function GET(
+  req: Request,
+  { params }: { params: { id: string } }
+) {
+  try {
+    const session = await auth();
+
+    if (!session?.user || !session?.user.id) {
+      return new Response(JSON.stringify({ message: "Unauthorized" }), {
+        status: 401,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
+    const deal = await prisma.deal.findUnique({
+      where: {
+        id: params.id,
+      },
+    });
+
+    if (!deal) {
+      return new Response(JSON.stringify({ message: "Deal not found" }), {
+        status: 404,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
+    return new Response(JSON.stringify(deal), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
+
+  } catch (error) {
+    console.error("Error fetching deal:", error);
+    return new Response(JSON.stringify({ message: "Internal Server Error" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+}
+
 export async function PATCH(
   req: Request,
   { params }: { params: { id: string } }

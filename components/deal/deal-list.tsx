@@ -17,6 +17,7 @@ import { EditDealModal } from "./edit-deal-modal";
 import { ViewDealModal } from "./view-deal-modal";
 import { Badge } from "../ui/badge";
 import { Card } from "../ui/card";
+import { ShareDealModal } from "./share-deal-modal";
 
 interface Deal {
   id: string;
@@ -32,6 +33,7 @@ export function DealList() {
   const [selectedDeal, setSelectedDeal] = useState<Deal | null>(null);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showViewModal, setShowViewModal] = useState(false);
+  const [showShareModal, setShowShareModal] = useState(false);
 
   useEffect(() => {
     fetchDeals();
@@ -59,6 +61,11 @@ export function DealList() {
   const handleEdit = (deal: Deal) => {
     setSelectedDeal(deal);
     setShowEditModal(true);
+  };
+
+  const handleShare = (deal: Deal) => {
+    setSelectedDeal(deal);
+    setShowShareModal(true);
   };
 
   const handleDelete = async (id: string) => {
@@ -122,6 +129,14 @@ export function DealList() {
               <span className="sr-only">Pay</span>
             </Button>
           )}
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handleShare(deal)}
+          >
+            <Icons.share className="size-4" />
+            <span className="sr-only">Share</span>
+          </Button>
           <Button
             variant="outline"
             size="sm"
@@ -210,6 +225,14 @@ export function DealList() {
                         <Button
                           variant="outline"
                           size="sm"
+                          onClick={() => handleShare(deal)}
+                        >
+                          <Icons.share className="size-4" />
+                          <span className="sr-only">Share</span>
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
                           onClick={() => handleView(deal)}
                         >
                           <Icons.eye className="size-4" />
@@ -254,6 +277,12 @@ export function DealList() {
         showModal={showEditModal}
         setShowModal={setShowEditModal}
         onSuccess={onEditSuccess}
+      />
+
+      <ShareDealModal
+        deal={selectedDeal}
+        showModal={showShareModal}
+        setShowModal={setShowShareModal}
       />
     </>
   );

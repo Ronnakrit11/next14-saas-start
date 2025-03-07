@@ -25,6 +25,8 @@ const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: ["@prisma/client"],
   },
+  // Add output configuration
+  output: 'standalone',
 };
 
 module.exports = withContentlayer(nextConfig);
