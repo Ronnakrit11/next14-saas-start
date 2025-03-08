@@ -37,7 +37,7 @@ export default async function DashboardPage() {
     <>
       <DashboardHeader
         heading="Dashboard"
-        text={`Current Role : ${user?.role}`}
+        text={`Current Role: ${user?.role}`}
       >
         <div className="flex flex-col gap-2 sm:flex-row">
           <ProjectSwitcher />
@@ -56,7 +56,7 @@ export default async function DashboardPage() {
             <CardHeader>
               <CardTitle>No Projects</CardTitle>
               <CardDescription>
-                Click the "New Project" button in the project switcher to create your first project.
+                Click the &quot;New Project&quot; button in the project switcher to create your first project.
               </CardDescription>
             </CardHeader>
           </Card>
