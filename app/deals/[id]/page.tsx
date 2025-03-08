@@ -5,15 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import MaxWidthWrapper from "@/components/shared/max-width-wrapper";
-import { redirect } from "next/navigation";
 
 export default async function DealPage({ params }: { params: { id: string } }) {
-  const session = await auth();
-  
-  if (!session?.user) {
-    redirect("/login");
-  }
-
+  // Remove the auth check since we want this page to be public
   const deal = await prisma.deal.findUnique({
     where: {
       id: params.id,
@@ -23,6 +17,11 @@ export default async function DealPage({ params }: { params: { id: string } }) {
         select: {
           name: true,
           email: true,
+        },
+      },
+      project: {
+        select: {
+          title: true,
         },
       },
     },
@@ -51,6 +50,9 @@ export default async function DealPage({ params }: { params: { id: string } }) {
               <p className="mt-2 text-muted-foreground">
                 Created by {deal.user.name || deal.user.email}
               </p>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Project: {deal.project.title}
+              </p>
             </div>
 
             <div className="flex items-center justify-between border-y py-4">
@@ -68,13 +70,13 @@ export default async function DealPage({ params }: { params: { id: string } }) {
               <p>{formatDate(deal.createdAt.toISOString())}</p>
             </div>
 
-            {deal.status === "PENDING" && (
-              <div className="flex justify-end">
-                <Button size="lg">
+            <div className="flex justify-end">
+              <Button asChild size="lg">
+                <a href="https://www.facebook.com/experts8academy" target="_blank" rel="noopener noreferrer">
                   Contact FairFlows
-                </Button>
-              </div>
-            )}
+                </a>
+              </Button>
+            </div>
           </div>
         </Card>
       </div>
