@@ -16,7 +16,7 @@ export function CreateDealButton({ projectId }: CreateDealButtonProps) {
     <>
       <Button onClick={() => setShowNewDealModal(true)}>
         <Icons.plus className="mr-2 size-4" />
-        Create Deal
+       สร้างดีล
       </Button>
       <CreateDealModal 
         showModal={showNewDealModal} 
