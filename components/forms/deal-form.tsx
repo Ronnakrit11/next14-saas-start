@@ -63,9 +63,6 @@ export function DealForm({ onSuccess, projectId }: DealFormProps) {
       toast.success("Deal created successfully!");
       form.reset();
       onSuccess?.();
-      
-      // Refresh the page to update the deal list
-      window.location.reload();
     } catch (error) {
       console.error("Error creating deal:", error);
       toast.error(error instanceof Error ? error.message : "Something went wrong. Please try again.");

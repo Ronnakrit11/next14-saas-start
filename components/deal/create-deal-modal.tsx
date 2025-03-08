@@ -3,6 +3,7 @@
 import { Dispatch, SetStateAction } from "react";
 import { Modal } from "@/components/ui/modal";
 import { DealForm } from "@/components/forms/deal-form";
+import { useRouter } from "next/navigation";
 
 interface CreateDealModalProps {
   showModal: boolean;
@@ -11,6 +12,13 @@ interface CreateDealModalProps {
 }
 
 export function CreateDealModal({ showModal, setShowModal, projectId }: CreateDealModalProps) {
+  const router = useRouter();
+
+  const handleSuccess = () => {
+    setShowModal(false);
+    router.refresh(); // Refresh the page to update the deal list
+  };
+
   return (
     <Modal showModal={showModal} setShowModal={setShowModal}>
       <div className="w-full">
@@ -22,7 +30,7 @@ export function CreateDealModal({ showModal, setShowModal, projectId }: CreateDe
         </div>
 
         <div className="px-4 py-8 md:px-16">
-          <DealForm onSuccess={() => setShowModal(false)} projectId={projectId} />
+          <DealForm onSuccess={handleSuccess} projectId={projectId} />
         </div>
       </div>
     </Modal>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
 import { formatDate } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -25,9 +26,12 @@ interface Deal {
   price: number;
   status: "PENDING" | "PAID";
   createdAt: string;
+  projectId: string;
 }
 
 export function DealList() {
+  const params = useParams();
+  const router = useRouter();
   const [deals, setDeals] = useState<Deal[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedDeal, setSelectedDeal] = useState<Deal | null>(null);
@@ -37,11 +41,11 @@ export function DealList() {
 
   useEffect(() => {
     fetchDeals();
-  }, []);
+  }, [params.projectSlug]);
 
   const fetchDeals = async () => {
     try {
-      const response = await fetch("/api/deals");
+      const response = await fetch(`/api/deals?projectSlug=${params.projectSlug}`);
       if (!response.ok) throw new Error("Failed to fetch deals");
       const data = await response.json();
       setDeals(data);
