@@ -6,7 +6,7 @@ import { ExpandableTabs } from "@/components/ui/expandable-tabs";
 export function BottomNav() {
   const tabs = [
     { title: "Home", icon: Home },
-    { title: "Profile", icon: User },
+    { title: "Manage", icon: User },
     { type: "separator" as const },
     { title: "Notifications", icon: Bell },
     { title: "Settings", icon: Settings },
