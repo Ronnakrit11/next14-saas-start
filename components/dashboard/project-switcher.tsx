@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import { Check, ChevronsUpDown, Plus } from "lucide-react";
 import { useSession } from "next-auth/react";
 
@@ -37,6 +37,7 @@ export default function ProjectSwitcher({
 }) {
   const { data: session, status } = useSession();
   const router = useRouter();
+  const params = useParams();
   const [openPopover, setOpenPopover] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
   const [projects, setProjects] = useState<ProjectType[]>([]);
@@ -51,9 +52,17 @@ export default function ProjectSwitcher({
         if (!response.ok) throw new Error("Failed to fetch projects");
         const data = await response.json();
         setProjects(data);
-        if (data.length > 0 && !selectedProject) {
-          setSelectedProject(data[0]);
+        
+        // Find and set the current project based on the URL slug
+        if (params.projectSlug) {
+          const currentProject = data.find(
+            (project: ProjectType) => project.slug === params.projectSlug
+          );
+          if (currentProject) {
+            setSelectedProject(currentProject);
+          }
         }
+        
         setLoading(false);
       } catch (error) {
         console.error("Error fetching projects:", error);
@@ -62,8 +71,10 @@ export default function ProjectSwitcher({
       }
     };
 
-    fetchProjects();
-  }, []);
+    if (session?.user) {
+      fetchProjects();
+    }
+  }, [session, params.projectSlug]);
 
   if (loading || !projects || status === "loading") {
     return <ProjectSwitcherPlaceholder />;
@@ -81,9 +92,30 @@ export default function ProjectSwitcher({
       .replace(/[^a-z0-9]+/g, '-')
       .replace(/(^-|-$)+/g, '');
 
-    // Random color selection
-    const colors = ['red', 'blue', 'green', 'purple', 'pink'];
-    const color = `bg-${colors[Math.floor(Math.random() * colors.length)]}-500`;
+    // Define a set of distinct colors
+    const projectColors = [
+      'bg-blue-500',
+      'bg-red-500', 
+      'bg-green-500',
+      'bg-yellow-500',
+      'bg-purple-500',
+      'bg-pink-500',
+      'bg-indigo-500',
+      'bg-orange-500',
+      'bg-teal-500',
+      'bg-cyan-500'
+    ];
+
+    // Get colors already in use
+    const usedColors = new Set(projects.map(p => p.color));
+    
+    // Filter out used colors
+    const availableColors = projectColors.filter(color => !usedColors.has(color));
+    
+    // If all colors are used, start over with the full set
+    const color = availableColors.length > 0 
+      ? availableColors[Math.floor(Math.random() * availableColors.length)]
+      : projectColors[Math.floor(Math.random() * projectColors.length)];
 
     try {
       const response = await fetch("/api/projects", {
@@ -122,10 +154,6 @@ export default function ProjectSwitcher({
     router.push(`/dashboard/${project.slug}`);
     toast.success(`Switched to ${project.title}`);
   };
-
-  if (!selectedProject && projects.length > 0) {
-    setSelectedProject(projects[0]);
-  }
 
   return (
     <div>
