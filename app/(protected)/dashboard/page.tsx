@@ -41,12 +41,7 @@ export default async function DashboardPage() {
       >
         <div className="flex flex-col gap-2 sm:flex-row">
           <ProjectSwitcher />
-          <Button className="w-full sm:w-auto" asChild>
-            <Link href="/dashboard/create-deal">
-              <Icons.add className="mr-2 size-4" />
-              Create Deal
-            </Link>
-          </Button>
+      
         </div>
       </DashboardHeader>
 
