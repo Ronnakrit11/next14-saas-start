@@ -5,7 +5,7 @@ const site_url = env.NEXT_PUBLIC_APP_URL;
 
 export const siteConfig: SiteConfig = {
   name: "FairFlows",
-  description: "FairFlows - ระบบจัดการการจ้างงานที่ปลอดภัย ทั้งผู้จ้างเเละผู้รับจ้าง ด้วยระบบ Escrow ที่มีความน่าเชื่อถือ",
+  description: "FairFlows - ตัวกลางการจ้างงานที่ปลอดภัย ทั้งผู้จ้างเเละผู้รับจ้าง ด้วยระบบ Escrow ที่มีความน่าเชื่อถือ",
   url: site_url,
   ogImage: `${site_url}/fairflows.jpg`,
   links: {
