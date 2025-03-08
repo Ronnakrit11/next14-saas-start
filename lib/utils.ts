@@ -24,39 +24,51 @@ export function constructMetadata({
   noIndex?: boolean;
 } = {}): Metadata {
   return {
-    title,
+    title: {
+      default: title,
+      template: `%s | ${siteConfig.name}`,
+    },
     description,
     keywords: [
-      "Next.js",
-      "React",
-      "Prisma",
-      "Neon",
-      "Auth.js",
-      "shadcn ui",
-      "Resend",
-      "React Email",
-      "Stripe",
+      "FairFlows",
+      "Escrow",
+      "ระบบจัดการการจ้างงาน",
+      "ระบบจัดการการจ้างงานที่ปลอดภัย",
+      "ระบบจัดการการจ้างงานออนไลน์",
+      "ระบบจัดการการจ้างงานที่น่าเชื่อถือ",
+      "ระบบจัดการการจ้างงานที่มีความปลอดภัย",
+      "ระบบจัดการการจ้างงานที่มีความน่าเชื่อถือ",
     ],
     authors: [
       {
-        name: "mickasmt",
+        name: "Expert8-Solution",
+        url: "https://www.facebook.com/experts8academy",
       },
     ],
-    creator: "mickasmt",
+    creator: "Expert8-Solution",
     openGraph: {
       type: "website",
-      locale: "en_US",
+      locale: "th_TH",
+      alternateLocale: "en_US",
       url: siteConfig.url,
       title,
       description,
       siteName: title,
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
       images: [image],
-      creator: "@miickasmt",
+      creator: "@experts8academy",
     },
     icons,
     metadataBase: new URL(siteConfig.url),
@@ -72,7 +84,7 @@ export function constructMetadata({
 
 export function formatDate(input: string | number): string {
   const date = new Date(input);
-  return date.toLocaleDateString("en-US", {
+  return date.toLocaleDateString("th-TH", {
     month: "long",
     day: "numeric",
     year: "numeric",

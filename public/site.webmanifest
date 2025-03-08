@@ -1,6 +1,7 @@
 {
-  "name": "SaaS Starter",
-  "short_name": "SaaS Starter",
+  "name": "FairFlows",
+  "short_name": "FairFlows",
+  "description": "FairFlows - ระบบจัดการการจ้างงานที่ปลอดภัย ทั้งผู้จ้างเเละผู้รับจ้าง ด้วยระบบ Escrow ที่มีความน่าเชื่อถือ",
   "icons": [
     {
       "src": "./favicons/android-chrome-192x192.png",
@@ -15,5 +16,7 @@
   ],
   "theme_color": "#ffffff",
   "background_color": "#ffffff",
-  "display": "standalone"
+  "display": "standalone",
+  "start_url": "/",
+  "orientation": "portrait"
 }

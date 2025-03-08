@@ -5,15 +5,14 @@ const site_url = env.NEXT_PUBLIC_APP_URL;
 
 export const siteConfig: SiteConfig = {
   name: "FairFlows",
-  description:
-    "Get your project off to an explosive start with SaaS Starter! Harness the power of Next.js 14, Prisma, Neon, Auth.js v5, Resend, React Email, Shadcn/ui and Stripe to build your next big thing.",
+  description: "FairFlows - ระบบจัดการการจ้างงานที่ปลอดภัย ทั้งผู้จ้างเเละผู้รับจ้าง ด้วยระบบ Escrow ที่มีความน่าเชื่อถือ",
   url: site_url,
-  ogImage: `${site_url}/_static/og.jpg`,
+  ogImage: `${site_url}/nextgen.png`,
   links: {
-    twitter: "https://twitter.com/miickasmt",
-    github: "https://github.com/mickasmt/next-saas-stripe-starter",
+    twitter: "https://twitter.com/",
+    github: "https://github.com/",
   },
-  mailSupport: "support@saas-starter.com",
+  mailSupport: "support@fairflows.com",
 };
 
 export const footerLinks: SidebarNavItem[] = [
@@ -35,13 +34,5 @@ export const footerLinks: SidebarNavItem[] = [
       { title: "Changelog", href: "#" },
     ],
   },
-  {
-    title: "Docs",
-    items: [
-      { title: "Introduction", href: "#" },
-      { title: "Installation", href: "#" },
-      { title: "Components", href: "#" },
-      { title: "Code Blocks", href: "#" },
-    ],
-  },
+ 
 ];
