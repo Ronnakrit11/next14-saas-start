@@ -7,7 +7,7 @@ export const siteConfig: SiteConfig = {
   name: "FairFlows",
   description: "FairFlows - ตัวกลางการจ้างงานที่ปลอดภัย ทั้งผู้จ้างเเละผู้รับจ้าง ด้วยระบบ Escrow ที่มีความน่าเชื่อถือ",
   url: site_url,
-  ogImage: `${site_url}/fairflows.jpg`,
+  ogImage: `${site_url}/fairflows.png`,
   links: {
     twitter: "https://twitter.com/",
     github: "https://github.com/",
