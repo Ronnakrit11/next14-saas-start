@@ -211,7 +211,7 @@ export function PricingCards({ userId, subscriptionPlan }: PricingCardsProps) {
             className="font-medium text-primary hover:underline"
             href="mailto:support@saas-starter.com"
           >
-            support@saas-starter.com
+            info@expert8-solution.com
           </a>{" "}
           for to contact our support team.
           <br />
