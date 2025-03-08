@@ -7,12 +7,12 @@ export const siteConfig: SiteConfig = {
   name: "FairFlows",
   description: "FairFlows - ระบบจัดการการจ้างงานที่ปลอดภัย ทั้งผู้จ้างเเละผู้รับจ้าง ด้วยระบบ Escrow ที่มีความน่าเชื่อถือ",
   url: site_url,
-  ogImage: `${site_url}/nextgen.png`,
+  ogImage: `${site_url}/fairflows.jpg`,
   links: {
     twitter: "https://twitter.com/",
     github: "https://github.com/",
   },
-  mailSupport: "support@fairflows.com",
+  mailSupport: "info@expert8-solution.com",
 };
 
 export const footerLinks: SidebarNavItem[] = [
