@@ -30,6 +30,7 @@ export function CreateAffiliateModal({ showModal, setShowModal }: CreateAffiliat
     defaultValues: {
       name: "",
       email: "",
+      password: "",
       commission: "",
     },
   });
@@ -92,7 +93,25 @@ export function CreateAffiliateModal({ showModal, setShowModal }: CreateAffiliat
                 )}
               />
 
-         
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <Input 
+                        type="password"
+                        placeholder="Enter affiliate password"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+          
 
               <Button type="submit" className="w-full">
                 {form.formState.isSubmitting && (
