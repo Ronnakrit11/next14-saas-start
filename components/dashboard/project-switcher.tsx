@@ -184,7 +184,7 @@ export default function ProjectSwitcher({
                 </>
               ) : (
                 <span className="text-sm text-muted-foreground">
-                  Select a project
+                 เลือกร้านค้า
                 </span>
               )}
             </div>
