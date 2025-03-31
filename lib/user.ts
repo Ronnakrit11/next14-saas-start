@@ -6,10 +6,6 @@ export const getUserByEmail = async (email: string) => {
       where: {
         email: email,
       },
-      select: {
-        name: true,
-        emailVerified: true,
-      },
     });
 
     return user;
@@ -28,6 +24,7 @@ export const getUserById = async (id: string) => {
         email: true,
         image: true,
         role: true,
+        password: true,
       }
     });
 
