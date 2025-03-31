@@ -92,23 +92,7 @@ export function CreateAffiliateModal({ showModal, setShowModal }: CreateAffiliat
                 )}
               />
 
-              <FormField
-                control={form.control}
-                name="commission"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Commission Rate (%)</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="number"
-                        placeholder="Enter commission percentage"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+         
 
               <Button type="submit" className="w-full">
                 {form.formState.isSubmitting && (
