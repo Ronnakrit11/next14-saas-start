@@ -1,11 +1,11 @@
-
-
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import {
+  AlertCircle,
   AlertTriangle,
   ArrowRight,
   ArrowUpRight,
+  Banknote,
   BookOpen,
   Check,
   ChevronLeft,
@@ -70,8 +70,11 @@ const Logo = ({ className, ...props }: LogoProps) => (
 
 const icons = {
   add: Plus,
+  alertCircle: AlertCircle,
+  alertTriangle: AlertTriangle,
   arrowRight: ArrowRight,
   arrowUpRight: ArrowUpRight,
+  banknote: Banknote,
   billing: CreditCard,
   bookOpen: BookOpen,
   chevronLeft: ChevronLeft,
