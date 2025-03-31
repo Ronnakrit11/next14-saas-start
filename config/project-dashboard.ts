@@ -41,6 +41,11 @@ export const projectSidebarLinks: SidebarNavItem[] = [
         title: "Project Settings" 
       },
       {
+        href: "/products",
+        icon: "package",
+        title: "Products",
+      },
+      {
         href: "/members",
         icon: "user",
         title: "Team Members",
