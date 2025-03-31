@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Icons } from "@/components/shared/icons";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 interface DealFormProps {
   onSuccess?: () => void;
@@ -31,6 +32,7 @@ export function DealForm({ onSuccess, projectId }: DealFormProps) {
     defaultValues: {
       title: "",
       price: "",
+      role: undefined,
       status: "PENDING", // Force PENDING status for new deals
     },
   });
@@ -101,6 +103,28 @@ export function DealForm({ onSuccess, projectId }: DealFormProps) {
                   {...field}
                 />
               </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="role"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>บทบาท</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="เลือกบทบาทของคุณ" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="BUYER">ผู้ซื้อ</SelectItem>
+                  <SelectItem value="SELLER">ผู้ขาย</SelectItem>
+                </SelectContent>
+              </Select>
               <FormMessage />
             </FormItem>
           )}
