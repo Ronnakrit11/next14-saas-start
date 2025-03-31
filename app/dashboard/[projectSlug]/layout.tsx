@@ -1,7 +1,8 @@
 import { redirect } from "next/navigation";
 
-import { sidebarLinks } from "@/config/dashboard";
+import { projectSidebarLinks } from "@/config/project-dashboard";
 import { getCurrentUser } from "@/lib/session";
+import { prisma } from "@/lib/db";
 import { SearchCommand } from "@/components/dashboard/search-command";
 import {
   DashboardSidebar,
@@ -13,14 +14,36 @@ import MaxWidthWrapper from "@/components/shared/max-width-wrapper";
 
 interface ProtectedLayoutProps {
   children: React.ReactNode;
+  params: { projectSlug: string };
 }
 
-export default async function Dashboard({ children }: ProtectedLayoutProps) {
+export default async function ProjectLayout({ children, params }: ProtectedLayoutProps) {
   const user = await getCurrentUser();
 
   if (!user) redirect("/login");
 
-  const filteredLinks = sidebarLinks.map((section) => ({
+  // Verify project exists and belongs to user
+  const project = await prisma.project.findFirst({
+    where: {
+      slug: params.projectSlug,
+      userId: user.id,
+    },
+  });
+
+  if (!project) {
+    redirect("/dashboard");
+  }
+
+  // Convert relative paths to absolute paths with current project slug
+  const linksWithProjectSlug = projectSidebarLinks.map(section => ({
+    ...section,
+    items: section.items.map(item => ({
+      ...item,
+      href: `/dashboard/${params.projectSlug}${item.href}`
+    }))
+  }));
+
+  const filteredLinks = linksWithProjectSlug.map((section) => ({
     ...section,
     items: section.items.filter(
       ({ authorizeOnly }) => !authorizeOnly || authorizeOnly === user.role,
