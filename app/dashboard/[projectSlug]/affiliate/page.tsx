@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DashboardHeader } from "@/components/dashboard/header";
 import { constructMetadata } from "@/lib/utils";
+import { CreateAffiliateButton } from "@/components/affiliate/create-affiliate-button";
 
 export const metadata = constructMetadata({
   title: "Affiliate Users – FairFlows",
@@ -21,7 +22,9 @@ export default async function AffiliateUsersPage({ params }: { params: { project
       <DashboardHeader
         heading="Affiliate Users"
         text="Manage your affiliate users and track their performance."
-      />
+      >
+        <CreateAffiliateButton />
+      </DashboardHeader>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card>
