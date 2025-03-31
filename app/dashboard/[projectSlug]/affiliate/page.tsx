@@ -4,6 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DashboardHeader } from "@/components/dashboard/header";
 import { constructMetadata } from "@/lib/utils";
 import { CreateAffiliateButton } from "@/components/affiliate/create-affiliate-button";
+import { prisma } from "@/lib/db";
+import { formatDate } from "@/lib/utils";
 
 export const metadata = constructMetadata({
   title: "Affiliate Users – FairFlows",
@@ -16,6 +18,25 @@ export default async function AffiliateUsersPage({ params }: { params: { project
   if (!session?.user) {
     redirect("/login");
   }
+
+  // Fetch affiliate users
+  const affiliates = await prisma.user.findMany({
+    where: {
+      referrerId: session.user.id,
+      role: "AFFILIATE",
+    },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      createdAt: true,
+    },
+  });
+
+  // Calculate total commission earned (this is a placeholder - you'll need to implement actual commission tracking)
+  const totalCommission = 0;
+  const activeAffiliates = affiliates.length;
+  const pendingCommission = 0;
 
   return (
     <>
@@ -34,9 +55,9 @@ export default async function AffiliateUsersPage({ params }: { params: { project
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">0</div>
+            <div className="text-2xl font-bold">{affiliates.length}</div>
             <p className="text-xs text-muted-foreground">
-              +0% from last month
+              {activeAffiliates} active affiliates
             </p>
           </CardContent>
         </Card>
@@ -48,9 +69,9 @@ export default async function AffiliateUsersPage({ params }: { params: { project
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">0</div>
+            <div className="text-2xl font-bold">{activeAffiliates}</div>
             <p className="text-xs text-muted-foreground">
-              +0% from last month
+              {((activeAffiliates / affiliates.length) * 100).toFixed(1)}% of total affiliates
             </p>
           </CardContent>
         </Card>
@@ -62,9 +83,9 @@ export default async function AffiliateUsersPage({ params }: { params: { project
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">฿0</div>
+            <div className="text-2xl font-bold">฿{totalCommission.toLocaleString()}</div>
             <p className="text-xs text-muted-foreground">
-              +0% from last month
+              Lifetime earnings
             </p>
           </CardContent>
         </Card>
@@ -76,9 +97,9 @@ export default async function AffiliateUsersPage({ params }: { params: { project
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">฿0</div>
+            <div className="text-2xl font-bold">฿{pendingCommission.toLocaleString()}</div>
             <p className="text-xs text-muted-foreground">
-              +0% from last month
+              To be paid out
             </p>
           </CardContent>
         </Card>
@@ -89,9 +110,32 @@ export default async function AffiliateUsersPage({ params }: { params: { project
           <CardTitle>Affiliate Users</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="text-center text-sm text-muted-foreground">
-            No affiliate users found.
-          </div>
+          {affiliates.length === 0 ? (
+            <div className="text-center text-sm text-muted-foreground">
+              No affiliate users found.
+            </div>
+          ) : (
+            <div className="relative overflow-x-auto">
+              <table className="w-full text-left text-sm">
+                <thead className="bg-muted/50 text-muted-foreground">
+                  <tr>
+                    <th className="p-3">Name</th>
+                    <th className="p-3">Email</th>
+                    <th className="p-3">Joined Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {affiliates.map((affiliate) => (
+                    <tr key={affiliate.id} className="border-b">
+                      <td className="p-3">{affiliate.name}</td>
+                      <td className="p-3">{affiliate.email}</td>
+                      <td className="p-3">{formatDate(affiliate.createdAt.toString())}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </CardContent>
       </Card>
     </>

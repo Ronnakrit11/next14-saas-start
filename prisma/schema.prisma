@@ -13,6 +13,7 @@ datasource db {
 enum UserRole {
   ADMIN
   USER
+  AFFILIATE
 }
 
 enum DealStatus {
@@ -68,6 +69,10 @@ model User {
   createdAt     DateTime  @default(now()) @map(name: "created_at")
   updatedAt     DateTime  @default(now()) @map(name: "updated_at")
   role          UserRole  @default(USER)
+  password      String?
+  referrerId    String?   @map("referrer_id")
+  referrer      User?     @relation("ReferralRelation", fields: [referrerId], references: [id])
+  referrals     User[]    @relation("ReferralRelation")
 
   accounts Account[]
   sessions Session[]

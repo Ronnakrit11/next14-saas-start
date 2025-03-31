@@ -31,20 +31,34 @@ export function CreateAffiliateModal({ showModal, setShowModal }: CreateAffiliat
       name: "",
       email: "",
       password: "",
-      commission: "",
     },
   });
 
   const onSubmit = async (data: AffiliateFormValues) => {
     try {
-      // TODO: Implement affiliate user creation
-      console.log("Form data:", data);
+      const response = await fetch("/api/affiliate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const responseData = await response.json();
+
+      if (!response.ok) {
+        throw new Error(responseData.message || "Failed to create affiliate user");
+      }
+
       toast.success("Affiliate user created successfully!");
       setShowModal(false);
       form.reset();
+      
+      // Refresh the page to show updated affiliate list
+      window.location.reload();
     } catch (error) {
       console.error("Error creating affiliate:", error);
-      toast.error("Failed to create affiliate user");
+      toast.error(error instanceof Error ? error.message : "Failed to create affiliate user");
     }
   };
 
@@ -110,8 +124,6 @@ export function CreateAffiliateModal({ showModal, setShowModal }: CreateAffiliat
                   </FormItem>
                 )}
               />
-
-          
 
               <Button type="submit" className="w-full">
                 {form.formState.isSubmitting && (
