@@ -48,11 +48,6 @@ export default function ProjectSwitcher({
   // Check if user is an affiliate
   const isAffiliate = session?.user?.role === "AFFILIATE";
 
-  // If user is an affiliate, don't show the project switcher
-  if (isAffiliate) {
-    return null;
-  }
-
   useEffect(() => {
     const fetchProjects = async () => {
       try {
@@ -83,6 +78,11 @@ export default function ProjectSwitcher({
       fetchProjects();
     }
   }, [session, params.projectSlug]);
+
+  // If user is an affiliate, don't show the project switcher
+  if (isAffiliate) {
+    return null;
+  }
 
   if (loading || !projects || status === "loading") {
     return <ProjectSwitcherPlaceholder />;
