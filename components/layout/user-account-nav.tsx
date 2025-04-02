@@ -32,6 +32,11 @@ export function UserAccountNav() {
       <div className="size-8 animate-pulse rounded-full border bg-muted" />
     );
 
+  // Determine dashboard link based on user role
+  const dashboardLink = user.role === "AFFILIATE" 
+    ? "/dashboard" // This will be redirected to commissions page by the layout
+    : "/dashboard";
+
   if (isMobile) {
     return (
       <Drawer.Root open={open} onClose={closeDrawer}>
@@ -63,16 +68,18 @@ export function UserAccountNav() {
             </div>
 
             <ul role="list" className="mb-14 mt-1 w-full text-muted-foreground">
-              <li className="rounded-lg text-foreground hover:bg-muted">
-                <Link
-                  href="/dashboard"
-                  onClick={closeDrawer}
-                  className="flex w-full items-center gap-3 px-2.5 py-2"
-                >
-                  <LayoutDashboard className="size-4" />
-                  <p className="text-sm">Dashboard</p>
-                </Link>
-              </li>
+              {user.role !== "AFFILIATE" && (
+                <li className="rounded-lg text-foreground hover:bg-muted">
+                  <Link
+                    href={dashboardLink}
+                    onClick={closeDrawer}
+                    className="flex w-full items-center gap-3 px-2.5 py-2"
+                  >
+                    <LayoutDashboard className="size-4" />
+                    <p className="text-sm">Dashboard</p>
+                  </Link>
+                </li>
+              )}
 
               <li className="rounded-lg text-foreground hover:bg-muted">
                 <Link
@@ -128,12 +135,14 @@ export function UserAccountNav() {
         </div>
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem asChild>
-          <Link href="/dashboard" className="flex items-center space-x-2.5">
-            <LayoutDashboard className="size-4" />
-            <p className="text-sm">Dashboard</p>
-          </Link>
-        </DropdownMenuItem>
+        {user.role !== "AFFILIATE" && (
+          <DropdownMenuItem asChild>
+            <Link href={dashboardLink} className="flex items-center space-x-2.5">
+              <LayoutDashboard className="size-4" />
+              <p className="text-sm">Dashboard</p>
+            </Link>
+          </DropdownMenuItem>
+        )}
 
         <DropdownMenuItem asChild>
           <Link

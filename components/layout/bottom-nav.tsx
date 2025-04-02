@@ -2,11 +2,22 @@
 
 import { Bell, Home, HelpCircle, Settings, User } from "lucide-react";
 import { ExpandableTabs } from "@/components/ui/expandable-tabs";
+import { useSession } from "next-auth/react";
 
 export function BottomNav() {
+  const { data: session } = useSession();
+  
+  // Don't show dashboard link for affiliate users
+  const showDashboard = !session?.user || session?.user.role !== "AFFILIATE";
+  
+  // Determine dashboard link based on user role
+  const dashboardLink = session?.user?.role === "AFFILIATE" 
+    ? "/dashboard" // This will be redirected to commissions page by the layout
+    : "/dashboard";
+  
   const tabs = [
     { title: "Home", icon: Home, href: "/" },
-    { title: "Manage", icon: User, href: "/dashboard" },
+    ...(showDashboard ? [{ title: "Manage", icon: User, href: dashboardLink }] : []),
     { type: "separator" as const },
     { title: "Notifications", icon: Bell },
     { title: "Settings", icon: Settings, href: "/dashboard/settings" },

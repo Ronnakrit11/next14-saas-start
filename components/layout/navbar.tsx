@@ -37,6 +37,11 @@ export function NavBar({ scroll = false }: NavBarProps) {
   const links =
     (selectedLayout && configMap[selectedLayout]) || marketingConfig.mainNav;
 
+  // Determine dashboard link based on user role
+  const dashboardLink = session?.user?.role === "AFFILIATE" 
+    ? "/dashboard" // This will be redirected to commissions page by the layout
+    : "/dashboard";
+
   return (
     <header
       className={`sticky top-0 z-40 flex w-full justify-center bg-background/60 backdrop-blur-xl transition-all ${
@@ -102,7 +107,7 @@ export function NavBar({ scroll = false }: NavBarProps) {
 
           {session ? (
             <Link
-              href={session.user.role === "ADMIN" ? "/admin" : "/dashboard"}
+              href={dashboardLink}
               className="hidden md:block"
             >
               <Button
