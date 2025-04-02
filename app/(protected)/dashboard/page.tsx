@@ -13,7 +13,15 @@ import ProjectSwitcher from "@/components/dashboard/project-switcher";
 
 export default function DashboardPage() {
   const { data: session, status } = useSession();
-  const [projects, setProjects] = useState([]);
+  interface Project {
+    id: string;
+    slug: string;
+    title: string;
+    color: string;
+    createdAt: string;
+    deals?: Array<{ price: number; status: string; }>;
+  }
+  const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -133,25 +141,31 @@ export default function DashboardPage() {
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-muted-foreground">Total Deals:</span>
                     <span className="font-medium">
-                      {project.deals ? project.deals.length : 0}
+                      {project.deals && Array.isArray(project.deals) ? project.deals.length : 0}
                     </span>
                   </div>
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-muted-foreground">Total Value:</span>
                     <span className="font-medium">
-                      ฿{project.deals ? project.deals.reduce((sum, deal) => sum + deal.price, 0).toLocaleString() : 0}
+                      ฿{project.deals && Array.isArray(project.deals) 
+                          ? project.deals.reduce((sum, deal) => sum + deal.price, 0).toLocaleString() 
+                          : 0}
                     </span>
                   </div>
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-muted-foreground">Pending Deals:</span>
                     <span className="font-medium">
-                      {project.deals ? project.deals.filter(deal => deal.status === "PENDING").length : 0}
+                      {project.deals && Array.isArray(project.deals) 
+                        ? project.deals.filter(deal => deal.status === "PENDING").length 
+                        : 0}
                     </span>
                   </div>
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-muted-foreground">Paid Deals:</span>
                     <span className="font-medium">
-                      {project.deals ? project.deals.filter(deal => deal.status === "PAID").length : 0}
+                      {project.deals && Array.isArray(project.deals) 
+                        ? project.deals.filter(deal => deal.status === "PAID").length 
+                        : 0}
                     </span>
                   </div>
                 </div>
