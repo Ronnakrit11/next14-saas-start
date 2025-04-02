@@ -45,6 +45,9 @@ export default function ProjectSwitcher({
   const [newProjectTitle, setNewProjectTitle] = useState("");
   const [loading, setLoading] = useState(true);
 
+  // Check if user is an affiliate
+  const isAffiliate = session?.user?.role === "AFFILIATE";
+
   useEffect(() => {
     const fetchProjects = async () => {
       try {
@@ -216,14 +219,16 @@ export default function ProjectSwitcher({
                 )}
               </Button>
             ))}
-            <Button
-              variant="outline"
-              className="mt-1 justify-start gap-2"
-              onClick={() => setOpenDialog(true)}
-            >
-              <Plus size={16} />
-              <span>New Project</span>
-            </Button>
+            {!isAffiliate && (
+              <Button
+                variant="outline"
+                className="mt-1 justify-start gap-2"
+                onClick={() => setOpenDialog(true)}
+              >
+                <Plus size={16} />
+                <span>New Project</span>
+              </Button>
+            )}
           </div>
         </PopoverContent>
       </Popover>

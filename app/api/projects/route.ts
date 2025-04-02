@@ -13,6 +13,38 @@ export async function GET(req: Request) {
       );
     }
 
+    // If user is an affiliate, get projects they're associated with
+    if (session.user.role === "AFFILIATE") {
+      const referrer = await prisma.user.findFirst({
+        where: {
+          referrals: {
+            some: {
+              id: session.user.id
+            }
+          }
+        }
+      });
+
+      if (!referrer) {
+        return NextResponse.json(
+          { error: "No referrer found" },
+          { status: 404 }
+        );
+      }
+
+      const projects = await prisma.project.findMany({
+        where: {
+          userId: referrer.id,
+        },
+        orderBy: {
+          createdAt: "desc",
+        },
+      });
+
+      return NextResponse.json(projects);
+    }
+
+    // For regular users, get their own projects
     const projects = await prisma.project.findMany({
       where: {
         userId: session.user.id,
@@ -40,6 +72,14 @@ export async function POST(req: Request) {
       return NextResponse.json(
         { error: "Unauthorized" },
         { status: 401 }
+      );
+    }
+
+    // Check if user is an affiliate - affiliates cannot create projects
+    if (session.user.role === "AFFILIATE") {
+      return NextResponse.json(
+        { error: "Affiliate users cannot create projects" },
+        { status: 403 }
       );
     }
 
