@@ -22,13 +22,38 @@ export default async function ProjectLayout({ children, params }: ProtectedLayou
 
   if (!user) redirect("/login");
 
-  // Verify project exists and belongs to user
-  const project = await prisma.project.findFirst({
-    where: {
-      slug: params.projectSlug,
-      userId: user.id,
-    },
-  });
+  // Verify project exists and belongs to user or user is an affiliate of the project owner
+  let project;
+  
+  if (user.role === "AFFILIATE") {
+    // For affiliates, find the project through their referrer
+    const referrer = await prisma.user.findFirst({
+      where: {
+        referrals: {
+          some: {
+            id: user.id
+          }
+        }
+      }
+    });
+    
+    if (referrer) {
+      project = await prisma.project.findFirst({
+        where: {
+          slug: params.projectSlug,
+          userId: referrer.id,
+        },
+      });
+    }
+  } else {
+    // For regular users, find their own project
+    project = await prisma.project.findFirst({
+      where: {
+        slug: params.projectSlug,
+        userId: user.id,
+      },
+    });
+  }
 
   if (!project) {
     redirect("/dashboard");
