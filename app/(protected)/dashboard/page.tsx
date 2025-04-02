@@ -13,15 +13,7 @@ import ProjectSwitcher from "@/components/dashboard/project-switcher";
 
 export default function DashboardPage() {
   const { data: session, status } = useSession();
-  interface Project {
-    id: string;
-    title: string;
-    slug: string;
-    color: string;
-    createdAt: string;
-    deals?: Array<{ price: number; status: string }>;
-  }
-  const [projects, setProjects] = useState<Project[]>([]);
+  const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
